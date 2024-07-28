@@ -111,12 +111,6 @@ public class MenuView : MonoBehaviour
 
     public void UpdateLeaderboard(string[] playerNames, int[] scores)
     {
-        // 清空现有的排行榜
-        foreach (Transform child in content)
-        {
-            Destroy(child.gameObject);
-        }
-
         // 生成新的排行榜项
         for (int i = 0; i < playerNames.Length; i++)
         {

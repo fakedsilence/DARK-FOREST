@@ -34,8 +34,6 @@ public class Enemy : MonoBehaviour
 
     public GameObject chessBoard;
 
-    public UnityEngine.UI.Slider slider;
-
     public GameObject hpObj;
 
     private Sprite sprite;
@@ -74,15 +72,11 @@ public class Enemy : MonoBehaviour
     {
         if (type == 5)
         {
-            slider.value -= damage;
+            chessBoard.GetComponent<GameMainView>().slider.value -= damage;
         }
         if (row == 0)
         {
-            slider.value -= damage;
-        }
-        if (slider.value <= 0)
-        {
-
+            chessBoard.GetComponent<GameMainView>().slider.value -= damage;
         }
     }
 
