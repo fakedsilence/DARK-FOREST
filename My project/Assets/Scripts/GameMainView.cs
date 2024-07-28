@@ -92,6 +92,7 @@ public class GameMainView : MonoBehaviour
                 newRoll.GetComponent<RollController>().col = y;
                 newRoll.GetComponent<RollController>().num = randomNumArr[i];
                 newRoll.GetComponent<RollController>().type = type;
+                newRoll.GetComponent<RollController>().Initialize();
                 GameUtils.rollsArr.Add(newRoll);
                 // newRoll.transform.position = blockTransform.position;
             }

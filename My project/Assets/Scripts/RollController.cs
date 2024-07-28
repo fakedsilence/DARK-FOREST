@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,11 +31,52 @@ public class RollController : MonoBehaviour
 
     private GameObject previousStorageBoard; // 记录上一个存储槽：
 
+    private Sprite sprite;
 
     void Start()
     {
         transform.position = new Vector3(-500, 0, 0);
         StartParabolaMove();
+    }
+
+    public void Initialize()
+    {
+        if (type == GameUtils.RollType.rowType)
+        {
+            if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/black/black" + num.ToString() + ".png")))
+            {
+                sprite = Resources.Load<Sprite>("Arts/Rolls/black/black" + num.ToString());
+                GetComponent<SpriteRenderer>().sprite = sprite;
+            }
+            else
+            {
+                Debug.Log("资源不存在");
+            }
+        }
+        else if (type == GameUtils.RollType.colType)
+        {
+            if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/blue/blue" + num.ToString() + ".png")))
+            {
+                sprite = Resources.Load<Sprite>("Arts/Rolls/blue/blue" + num.ToString());
+                GetComponent<SpriteRenderer>().sprite = sprite;
+            }
+            else
+            {
+                Debug.Log("资源不存在");
+            }
+        }
+        else
+        {
+            if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/silver/silver" + num.ToString() + ".png")))
+            {
+                sprite = Resources.Load<Sprite>("Arts/Rolls/silver/silver" + num.ToString());
+                GetComponent<SpriteRenderer>().sprite = sprite;
+            }
+            else
+            {
+                Debug.Log("资源不存在");
+            }
+        }
     }
 
     private void FixedUpdate()

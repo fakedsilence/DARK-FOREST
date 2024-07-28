@@ -130,8 +130,8 @@ public class MenuView : MonoBehaviour
                 playerNames.Add(element[i].name);
                 scores.Add(element[i].score);
             }
+            UpdateLeaderboard(playerNames, scores);
         }
-        UpdateLeaderboard(playerNames, scores);
     }
 
     public void UpdateLeaderboard(List<string> playerNames, List<int> scores)
