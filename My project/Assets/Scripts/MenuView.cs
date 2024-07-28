@@ -128,9 +128,8 @@ public class MenuView : MonoBehaviour
         }
     }
 
-    public void ShowPopup(string message)
+    public static void ShowPopup(string message, string title)
     {
-        tips.GetComponent<TextMeshProUGUI>().text = message;
         //to be completed
         return;
     }
