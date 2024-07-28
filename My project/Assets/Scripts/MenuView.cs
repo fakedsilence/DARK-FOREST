@@ -81,12 +81,12 @@ public class MenuView : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(0);
+                    Debug.Log("Account creation success");
                 }
             }).ContinueWith(t =>
             {
-                loginPanel.SetActive(false);
-                Debug.Log(1);
+                
+
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
@@ -96,6 +96,7 @@ public class MenuView : MonoBehaviour
         if (usernameString.Length > 2 && passwordString.Length > 2)
         {
             Task tsk = AccountManager.Instance.SendLogin(usernameString, passwordString);
+            bool canLogin = false;
             tsk.ContinueWith(t =>
             {
                 if (t.IsFaulted)
@@ -104,12 +105,16 @@ public class MenuView : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(0);
+                    Debug.Log("login success");
+                    canLogin = true;
                 }
             }).ContinueWith(t =>
             {
-                loginPanel.SetActive(false);
-                Debug.Log(1);
+                if(canLogin)
+                {
+                    loginPanel.SetActive(false);
+                }
+                
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
