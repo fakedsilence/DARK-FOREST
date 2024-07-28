@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,8 +19,14 @@ public class MenuView : MonoBehaviour
 
     public GameObject loginPanel;
 
+    public GameObject rankPanel;
+
+    public GameObject[] rankArr;
+
     private void Start()
     {
+        loginPanel.SetActive(true);
+        rankPanel.SetActive(false);
     }
 
     public void PlayGame()
@@ -136,13 +143,14 @@ public class MenuView : MonoBehaviour
 
     public void UpdateLeaderboard(List<string> playerNames, List<int> scores)
     {
+        rankPanel.SetActive(true);
+
         // 生成新的排行榜项
-        for (int i = 0; i < playerNames.Count; i++)
+        for (int i = 0; i < rankArr.Length; i++)
         {
-            GameObject newItem = Instantiate(itemCell);
-            Text[] texts = newItem.GetComponentsInChildren<Text>();
-            texts[0].text = playerNames[i]; // 玩家名
-            texts[1].text = scores[i].ToString(); // 分数
+            rankArr[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
+            rankArr[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = playerNames[i];
+            rankArr[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = scores[i].ToString();
         }
     }
 }

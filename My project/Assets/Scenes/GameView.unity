@@ -545,7 +545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &110804385
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2107,7 +2107,6 @@ GameObject:
   - component: {fileID: 407432729}
   - component: {fileID: 407432730}
   - component: {fileID: 407432732}
-  - component: {fileID: 407432731}
   m_Layer: 0
   m_Name: Roll_3
   m_TagString: Untagged
@@ -2251,21 +2250,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 64}
   m_EdgeRadius: 0
---- !u!111 &407432731
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407432725}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 4211622bac6272d489d68a91c4081cad, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &407432732
 Animator:
   serializedVersion: 5
@@ -3672,7 +3656,6 @@ GameObject:
   - component: {fileID: 664148280}
   - component: {fileID: 664148281}
   - component: {fileID: 664148283}
-  - component: {fileID: 664148282}
   m_Layer: 0
   m_Name: Roll_4
   m_TagString: Untagged
@@ -3816,21 +3799,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 64}
   m_EdgeRadius: 0
---- !u!111 &664148282
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 664148276}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 4211622bac6272d489d68a91c4081cad, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &664148283
 Animator:
   serializedVersion: 5
@@ -4421,7 +4389,6 @@ GameObject:
   - component: {fileID: 765551711}
   - component: {fileID: 765551712}
   - component: {fileID: 765551714}
-  - component: {fileID: 765551713}
   m_Layer: 0
   m_Name: Roll_6
   m_TagString: Untagged
@@ -4470,7 +4437,7 @@ SpriteRenderer:
   m_SortingLayerID: 1950177653
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 220a41ae711609a43a24914bbca76e02, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2dd2bcdb6dcb2804497e1226b64b974b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4490,7 +4457,7 @@ Transform:
   m_GameObject: {fileID: 765551707}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.3, z: 0}
+  m_LocalPosition: {x: -0.8, y: 3.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4556,7 +4523,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 60, y: 60}
+    oldSize: {x: 45.4, y: 51.2}
     newSize: {x: 0.6, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4565,21 +4532,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 60, y: 60}
   m_EdgeRadius: 0
---- !u!111 &765551713
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765551707}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 4211622bac6272d489d68a91c4081cad, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &765551714
 Animator:
   serializedVersion: 5
@@ -5975,7 +5927,6 @@ GameObject:
   - component: {fileID: 1047380735}
   - component: {fileID: 1047380736}
   - component: {fileID: 1047380738}
-  - component: {fileID: 1047380737}
   m_Layer: 0
   m_Name: Roll_2
   m_TagString: Untagged
@@ -6119,21 +6070,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 64}
   m_EdgeRadius: 0
---- !u!111 &1047380737
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1047380731}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 4211622bac6272d489d68a91c4081cad, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &1047380738
 Animator:
   serializedVersion: 5
@@ -7914,7 +7850,6 @@ GameObject:
   - component: {fileID: 1327775966}
   - component: {fileID: 1327775967}
   - component: {fileID: 1327775969}
-  - component: {fileID: 1327775968}
   m_Layer: 0
   m_Name: Roll_5
   m_TagString: Untagged
@@ -7963,7 +7898,7 @@ SpriteRenderer:
   m_SortingLayerID: 1950177653
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7ef2354e49ae2c742b46f81c08edd4ff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08a7e533c8f169046b830355c487bb86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8049,7 +7984,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 64, y: 64}
+    oldSize: {x: 45.4, y: 51.2}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8058,21 +7993,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 64}
   m_EdgeRadius: 0
---- !u!111 &1327775968
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327775962}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 4211622bac6272d489d68a91c4081cad, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &1327775969
 Animator:
   serializedVersion: 5
@@ -8524,7 +8444,6 @@ GameObject:
   - component: {fileID: 1403156352}
   - component: {fileID: 1403156353}
   - component: {fileID: 1403156355}
-  - component: {fileID: 1403156354}
   m_Layer: 0
   m_Name: Roll_1
   m_TagString: Untagged
@@ -8668,21 +8587,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 64, y: 64}
   m_EdgeRadius: 0
---- !u!111 &1403156354
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1403156348}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 4211622bac6272d489d68a91c4081cad, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &1403156355
 Animator:
   serializedVersion: 5
