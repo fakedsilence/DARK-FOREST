@@ -18,6 +18,10 @@ public class MenuView : MonoBehaviour
 
     public GameObject loginPanel;
 
+    private void Start()
+    {
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -109,10 +113,31 @@ public class MenuView : MonoBehaviour
         return;
     }
 
-    public void UpdateLeaderboard(string[] playerNames, int[] scores)
+    public async void showLeaderboard()
+    {
+        int uid = AccountManager.Instance.UserId;
+        List<string> playerNames = new List<string>();
+        List<int> scores = new List<int>();
+        List<AccountManager.LeaderboardElement> element = await AccountManager.Instance.SendLeaderboardRequest(uid);
+        if (element.Count == 0)
+        {
+            Debug.Log("空");
+        }
+        else
+        {
+            for (int i = 0; i < element.Count; i++)
+            {
+                playerNames.Add(element[i].name);
+                scores.Add(element[i].score);
+            }
+        }
+        UpdateLeaderboard(playerNames, scores);
+    }
+
+    public void UpdateLeaderboard(List<string> playerNames, List<int> scores)
     {
         // 生成新的排行榜项
-        for (int i = 0; i < playerNames.Length; i++)
+        for (int i = 0; i < playerNames.Count; i++)
         {
             GameObject newItem = Instantiate(itemCell);
             Text[] texts = newItem.GetComponentsInChildren<Text>();
@@ -122,6 +147,6 @@ public class MenuView : MonoBehaviour
 
         // 更新content的height以适应所有的排行榜项
         RectTransform contentRect = content.GetComponent<RectTransform>();
-        contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, playerNames.Length * itemCell.GetComponent<RectTransform>().sizeDelta.y);
+        contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, playerNames.Count * itemCell.GetComponent<RectTransform>().sizeDelta.y);
     }
 }

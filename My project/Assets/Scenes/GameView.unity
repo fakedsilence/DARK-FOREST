@@ -10485,7 +10485,6 @@ MonoBehaviour:
   fireDamage: 0
   score: 0
   chessBoard: {fileID: 2008587366}
-  slider: {fileID: 3316528}
   hpObj: {fileID: 1410600143}
 --- !u!1 &1556179818
 GameObject:
@@ -13080,6 +13079,7 @@ MonoBehaviour:
   addBoard: {fileID: 58064199}
   frozenBoard: {fileID: 1401269098}
   fireBoard: {fileID: 952727592}
+  slider: {fileID: 3316528}
 --- !u!212 &2008587368
 SpriteRenderer:
   m_ObjectHideFlags: 0

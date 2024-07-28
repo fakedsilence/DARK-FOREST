@@ -965,8 +965,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.7398071, y: 298.15417}
-  m_SizeDelta: {x: 73.48248, y: -777.19775}
+  m_AnchoredPosition: {x: 1.7398071, y: 376}
+  m_SizeDelta: {x: -41.3407, y: -787.2698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &228225885
 MonoBehaviour:
@@ -1338,7 +1338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -259, y: 0.000013292}
+  m_AnchoredPosition: {x: -174, y: 0.000013292}
   m_SizeDelta: {x: 113.0643, y: 51.0601}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &392508960
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2563,7 +2563,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1959562003}
         m_TargetAssemblyTypeName: MenuView, Assembly-CSharp
-        m_MethodName: ButtonTest
+        m_MethodName: showLeaderboard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4019,7 +4019,7 @@ GameObject:
   - component: {fileID: 1662878950}
   - component: {fileID: 1662878949}
   m_Layer: 5
-  m_Name: PlayerName (1)
+  m_Name: PlayerScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4041,7 +4041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -52, y: 0.000013292}
+  m_AnchoredPosition: {x: 177, y: 0.000013292}
   m_SizeDelta: {x: 113.0643, y: 51.0601}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1662878949
@@ -4064,7 +4064,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u59D3\u540D"
+  m_text: "\u5F97\u5206"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5355a6d8f6f6a8e4c8b6a687b2074581, type: 2}
   m_sharedMaterial: {fileID: -5665461556018757553, guid: 5355a6d8f6f6a8e4c8b6a687b2074581, type: 2}
@@ -4097,7 +4097,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
