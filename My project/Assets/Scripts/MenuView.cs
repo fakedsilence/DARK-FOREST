@@ -144,9 +144,5 @@ public class MenuView : MonoBehaviour
             texts[0].text = playerNames[i]; // 玩家名
             texts[1].text = scores[i].ToString(); // 分数
         }
-
-        // 更新content的height以适应所有的排行榜项
-        RectTransform contentRect = content.GetComponent<RectTransform>();
-        contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, playerNames.Count * itemCell.GetComponent<RectTransform>().sizeDelta.y);
     }
 }
