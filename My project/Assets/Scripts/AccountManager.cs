@@ -95,14 +95,18 @@ public class AccountManager
 
     public async Task<bool> SendLogin(string userName, string password)
     {
-        Debug.Log(Convert.ToBase64String(Encoding.UTF8.GetBytes(password)));
-        return await LoginAsync(new
+        bool success =  await LoginAsync(new
         {
             Username = userName,
             Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(password)), // base64 encoding
             LoginDate = DateTime.UtcNow
         });
-
+        if(success)
+        {
+            AccountManager.Instance.Username = userName;
+            AccountManager.Instance.Password = password;
+        }
+        return success;
     }
 
     public async Task<bool> SendCreateAccount(string userName, string password, string nickName)
@@ -178,7 +182,7 @@ public class AccountManager
         {
             result.Add(new LeaderboardElement(player.Username, player.HighScore));
         }
-
+        Debug.Log($"count: {result.Count}");
         return result;
     }
 
@@ -242,10 +246,13 @@ public class AccountManager
             if (response.IsSuccessStatusCode)
             {
                 var responseString = await response.Content.ReadAsStringAsync();
+                Debug.Log("here");
+                Debug.Log(responseString);
                 var responseObject = JsonConvert.DeserializeObject<LoginResponse>(responseString);
                 string uid = responseObject?.Uid;
                 AccountManager.Instance.UserId = int.Parse(uid);
                 Debug.Log($"可以登陆, uid: {uid}");
+                AccountManager.RequestLeaderboard(int.Parse(uid));
                 return true;
                 // 处理成功逻辑
             }
@@ -262,14 +269,15 @@ public class AccountManager
                
             }
         }
+        
         catch (HttpRequestException e)
         {
-            Console.WriteLine($"Request error: {e.Message}");
+            Debug.Log($"Request error: {e.Message}");
             // 处理请求异常逻辑
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Request error: {e.Message}");
+            Debug.Log($"Request error: {e.Message}");
         }
         return true;
     }
