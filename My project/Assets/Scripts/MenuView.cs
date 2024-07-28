@@ -21,11 +21,9 @@ public class MenuView : MonoBehaviour
 
     public GameObject rankPanel;
 
-    public GameObject bgPanel;
+    public GameObject mainPanel;
 
-    public GameObject tips;
-
-    public GameObject mainMenu;
+    public GameObject tipsPanel;
 
     public GameObject[] rankArr;
     // 单例实例
@@ -83,6 +81,7 @@ public class MenuView : MonoBehaviour
     {
         loginPanel.SetActive(true);
         rankPanel.SetActive(false);
+        mainPanel.SetActive(false);
     }
 
     public void PlayGame()
@@ -93,11 +92,6 @@ public class MenuView : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    public void RankButton()
-    {
-
     }
 
     string usernameString
@@ -142,9 +136,8 @@ public class MenuView : MonoBehaviour
                 }
             }).ContinueWith(t =>
             {
-                // loginPanel.SetActive(false);
-                // bgPanel.SetActive(false);
-                // mainMenu.SetActive(true);
+                loginPanel.SetActive(false);
+                mainPanel.SetActive(true);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
         else if (usernameString.Length <= 1)
@@ -180,18 +173,16 @@ public class MenuView : MonoBehaviour
                 if (canLogin)
                 {
                     loginPanel.SetActive(false);
-                    bgPanel.SetActive(false);
-                    mainMenu.SetActive(true);
+                    mainPanel.SetActive(true);
                 }
-
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
 
     public void ShowPopup(string message)
     {
-        tips.GetComponent<TextMeshProUGUI>().text = message;
-        tips.SetActive(true);
+        tipsPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = message;
+        tipsPanel.SetActive(true);
         //to be completed
         return;
     }

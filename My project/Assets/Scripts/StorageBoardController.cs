@@ -40,14 +40,42 @@ public class StorageBoardController : MonoBehaviour
             {
                 roll.GetComponent<RollController>().num++;
                 int num = roll.GetComponent<RollController>().num;
-                if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Roll/Roll_" + num.ToString() + ".png")))
+                GameUtils.RollType type = roll.GetComponent<RollController>().type;
+                if (type == GameUtils.RollType.rowType)
                 {
-                    sprite = Resources.Load<Sprite>("Arts/Roll/Roll_" + num.ToString());
-                    roll.GetComponent<SpriteRenderer>().sprite = sprite;
+                    if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/black/black" + num.ToString() + ".png")))
+                    {
+                        sprite = Resources.Load<Sprite>("Arts/Rolls/black/black" + num.ToString());
+                        roll.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
+                    else
+                    {
+                        Debug.Log("资源不存在");
+                    }
+                }
+                else if (type == GameUtils.RollType.colType)
+                {
+                    if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/blue/blue" + num.ToString() + ".png")))
+                    {
+                        sprite = Resources.Load<Sprite>("Arts/Rolls/blue/blue" + num.ToString());
+                        roll.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
+                    else
+                    {
+                        Debug.Log("资源不存在");
+                    }
                 }
                 else
                 {
-                    Debug.Log("资源不存在");
+                    if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/silver/silver" + num.ToString() + ".png")))
+                    {
+                        sprite = Resources.Load<Sprite>("Arts/Rolls/silver/silver" + num.ToString());
+                        roll.GetComponent<SpriteRenderer>().sprite = sprite;
+                    }
+                    else
+                    {
+                        Debug.Log("资源不存在");
+                    }
                 }
             }
             GameUtils.UpRound = 0;
