@@ -48,6 +48,8 @@ public class GameMainView : MonoBehaviour
 
     public GameObject fireBoard;
 
+    public UnityEngine.UI.Slider slider;
+
     void Awake()
     {
         levelArr = new int[] { 1, 8, 14, 19, 27, 34, 45 };
@@ -549,6 +551,14 @@ public class GameMainView : MonoBehaviour
         if (curScore > hisScore)
         {
             hisScoreObj.GetComponent<TextMeshPro>().text = curScore.ToString();
+        }
+    }
+
+    public void SubmitScore()
+    {
+        if (slider.value <= 0)
+        {
+
         }
     }
 
