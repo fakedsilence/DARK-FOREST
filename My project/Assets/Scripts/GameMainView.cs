@@ -617,6 +617,7 @@ public class GameMainView : MonoBehaviour
     {
         if (slider.value <= 0)
         {
+            AccountManager.Instance.SendScore(AccountManager.Instance.UserId, AccountManager.Instance.Password, score);
             Defeat();
         }
     }
