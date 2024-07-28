@@ -122,22 +122,29 @@ public class MenuView : MonoBehaviour
     {
         if (usernameString.Length > 1 && passwordString.Length > 5)
         {
+            bool success = false;
             Task<bool> tsk = AccountManager.Instance.SendCreateAccount(usernameString, passwordString, usernameString);
             tsk.ContinueWith(t =>
             {
                 if (t.Result)
                 {
+                    success = true;
                     Debug.Log("Account creation success");
                 }
                 else
                 {
-                    Debug.LogError("Account creation failed");
+                    Debug.Log("Account creation failed");
                     MenuView.Instance.ShowPopup("用户名已被占用");
                 }
             }).ContinueWith(t =>
             {
-                loginPanel.SetActive(false);
-                mainPanel.SetActive(true);
+                if(success)
+                {
+                    LoginButton();
+                    // loginPanel.SetActive(false);
+                    // mainPanel.SetActive(true);
+                }
+                
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
         else if (usernameString.Length <= 1)
@@ -146,7 +153,7 @@ public class MenuView : MonoBehaviour
         }
         else
         {
-            MenuView.Instance.ShowPopup("密码应当为至少2位字符");
+            MenuView.Instance.ShowPopup("密码应当为至少6位字符");
         }
 
     }
@@ -166,7 +173,7 @@ public class MenuView : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("login failed");
+                    Debug.Log("login failed");
                 }
             }).ContinueWith(t =>
             {

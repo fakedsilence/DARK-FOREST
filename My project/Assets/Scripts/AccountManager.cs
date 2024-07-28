@@ -223,7 +223,7 @@ public class AccountManager
         {
             Debug.Log("Failure");
             var errorMessage = await response.Content.ReadAsStringAsync();
-            MenuView.Instance.ShowPopup("无法创建账号: ");
+            MenuView.Instance.ShowPopup("无法创建账号\n用户名已被占用");
             //  + $"{response.StatusCode}: {errorMessage}"
             Debug.Log("无法创建账号{response.StatusCode}: {errorMessage}");
             return false;
@@ -263,7 +263,19 @@ public class AccountManager
 
 
                 var errorMessage = await response.Content.ReadAsStringAsync();
-                MenuView.Instance.ShowPopup("无法登录: ");
+                if(errorMessage.Contains("USER_NOT_EXIST"))
+                {
+                    MenuView.Instance.ShowPopup("登录失败\n用户不存在");
+                }
+                else if (errorMessage.Contains("INCORRECT_PASSWORD"))
+                {
+                    MenuView.Instance.ShowPopup("登录失败\n密码错误");
+                }
+                else
+                {
+                    MenuView.Instance.ShowPopup("登录失败\n未知错误");
+                }
+
                 // +$"{response.StatusCode}: {errorMessage}"
                 Debug.Log($"无法登陆{response.StatusCode}: {errorMessage}");
 
