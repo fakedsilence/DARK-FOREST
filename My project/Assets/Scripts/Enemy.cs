@@ -43,9 +43,14 @@ public class Enemy : MonoBehaviour
     private int hpScore;
 
 
+
     private void Awake()
     {
-
+        anim = GetComponent<Animator>();
+        if (anim == null)
+        {
+            anim = gameObject.AddComponent<Animator>();
+        }
     }
 
     private void Start()
@@ -119,7 +124,13 @@ public class Enemy : MonoBehaviour
         Transform blockTransform = chessBoard.transform.Find("block_" + row.ToString() + col.ToString());
         if (blockTransform != null)
         {
-            hp -= int.Parse(blockTransform.GetChild(1).GetComponent<TextMeshPro>().text);
+            int damage = int.Parse(blockTransform.GetChild(1).GetComponent<TextMeshPro>().text);
+            if (damage != 0)
+            {
+                hp -= damage;
+                gameObject.GetComponent<Animator>().SetBool("isHit", true);
+                StartCoroutine(ResetHitFlag());
+            }
             if (hp <= 0)
             {
                 Die();
@@ -127,6 +138,20 @@ public class Enemy : MonoBehaviour
             }
             UpdateHP();
         }
+    }
+
+    private IEnumerator ResetHitFlag()
+    {
+        yield return new WaitForSeconds(1); // 等待动画结束
+        anim.SetBool("isHit", false);
+    }
+
+    private IEnumerator ResetDieFlag()
+    {
+        yield return new WaitForSeconds(0.3f);
+        anim.SetBool("isDie", false);
+        SpawnSurroundingEnemies();
+        Destroy(gameObject);
     }
 
     // 更新敌人血量
@@ -141,9 +166,9 @@ public class Enemy : MonoBehaviour
         chessBoard.GetComponent<GameMainView>().AddScore(hpScore);
         GameUtils.RemovePosPair(row, col);
         GameUtils.enemysArr.Remove(gameObject);
-        SpawnSurroundingEnemies();
-        Destroy(gameObject);
+        anim.SetBool("isDie", true);
         chessBoard.GetComponent<GameMainView>().UpdateHisScore();
+        StartCoroutine(ResetDieFlag());
     }
 
     // 生成周围新的敌人

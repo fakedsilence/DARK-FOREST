@@ -14,7 +14,7 @@ public class StorageBoardController : MonoBehaviour
 
     private Sprite sprite;
 
-    private int levelNum = 0;
+    public int levelNum = 0;
 
     // 对已经被骰子占用的方格进行标记
     public bool CheckOccupied()
@@ -40,10 +40,10 @@ public class StorageBoardController : MonoBehaviour
         }
         if (GameUtils.UpRound == 2 && gameObject.tag == "Add" && roll != null)
         {
-            levelNum++;
-            gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + levelNum.ToString();
             if (roll.GetComponent<RollController>().num < 6)
             {
+                levelNum++;
+                gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + levelNum.ToString();
                 roll.GetComponent<RollController>().num++;
                 int num = roll.GetComponent<RollController>().num;
                 GameUtils.RollType type = roll.GetComponent<RollController>().type;
@@ -85,6 +85,15 @@ public class StorageBoardController : MonoBehaviour
                 }
             }
             GameUtils.UpRound = 0;
+        }
+    }
+
+    public void ClearAddBoard()
+    {
+        if (gameObject.tag == "Add" && roll != null)
+        {
+            levelNum = 0;
+            gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + levelNum.ToString();
         }
     }
 

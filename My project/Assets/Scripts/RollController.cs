@@ -111,7 +111,7 @@ public class RollController : MonoBehaviour
                         worldPos.z = selectedObject.transform.position.z;
                         for (int i = 0; i < storageBoard.Length; i++)
                         {
-                            if (Vector2.Distance(worldPos, storageBoard[i].transform.position) <= 25 && !storageBoard[i].GetComponent<StorageBoardController>().isOccupied)
+                            if (Vector2.Distance(worldPos, storageBoard[i].transform.position) <= 45 && !storageBoard[i].GetComponent<StorageBoardController>().isOccupied)
                             {
                                 if (previousStorageBoard != null && previousStorageBoard != storageBoard[i])
                                 {
@@ -172,7 +172,7 @@ public class RollController : MonoBehaviour
                 bool alreadyChosen = GameUtils.findPos(x, y);
                 string blockName = "block_" + x.ToString() + y.ToString();
                 Transform blockTransform = chessBoard.transform.Find(blockName);
-                if (blockTransform != null && !alreadyChosen && Vector2.Distance(worldPos, blockTransform.position) <= 40)
+                if (blockTransform != null && !alreadyChosen && Vector2.Distance(worldPos, blockTransform.position) <= 25)
                 {
                     GameUtils.updatePos(selectedObject.GetComponent<RollController>().row, selectedObject.GetComponent<RollController>().col, x, y);
                     moveBlockFalse(selectedObject.GetComponent<RollController>().row, selectedObject.GetComponent<RollController>().col);

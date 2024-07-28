@@ -272,34 +272,34 @@ public class GameMainView : MonoBehaviour
         {
             for (int j = 0; j < 6; j++)
             {
-                UpdateBlock(j, col, num, updateColor, updateNumber);
+                UpdateBlock(j, col, num, updateColor, updateNumber, type);
             }
         }
         else if (type == GameUtils.RollType.colType)
         {
             for (int j = 0; j < 5; j++)
             {
-                UpdateBlock(row, j, num, updateColor, updateNumber);
+                UpdateBlock(row, j, num, updateColor, updateNumber, type);
             }
         }
         else if (type == GameUtils.RollType.aroundType)
         {
-            UpdateBlock(row, col, num, updateColor, updateNumber);
+            UpdateBlock(row, col, num, updateColor, updateNumber, type);
             if (row - 1 >= 0)
             {
-                UpdateBlock(row - 1, col, num, updateColor, updateNumber);
+                UpdateBlock(row - 1, col, num, updateColor, updateNumber, type);
             }
             if (row + 1 <= 5)
             {
-                UpdateBlock(row + 1, col, num, updateColor, updateNumber);
+                UpdateBlock(row + 1, col, num, updateColor, updateNumber, type);
             }
             if (col - 1 >= 0)
             {
-                UpdateBlock(row, col - 1, num, updateColor, updateNumber);
+                UpdateBlock(row, col - 1, num, updateColor, updateNumber, type);
             }
             if (col + 1 <= 4)
             {
-                UpdateBlock(row, col + 1, num, updateColor, updateNumber);
+                UpdateBlock(row, col + 1, num, updateColor, updateNumber, type);
             }
         }
         else
@@ -311,14 +311,14 @@ public class GameMainView : MonoBehaviour
                 int newCol = col + directions[j, 1];
                 if (newRow >= 0 && newRow <= 5 && newCol >= 0 && newCol <= 4)
                 {
-                    UpdateBlock(newRow, newCol, num, updateColor, updateNumber);
+                    UpdateBlock(newRow, newCol, num, updateColor, updateNumber, type);
                 }
             }
         }
     }
 
     // 共用方法，根据参数更新方块状态
-    private void UpdateBlock(int row, int col, int num, bool updateColor, bool updateNumber)
+    private void UpdateBlock(int row, int col, int num, bool updateColor, bool updateNumber, GameUtils.RollType type)
     {
         Transform blockTransform = chessBoardTransform.Find("block_" + row.ToString() + col.ToString());
         if (blockTransform == null)
@@ -327,7 +327,7 @@ public class GameMainView : MonoBehaviour
             return;
         }
         blockTransform.GetChild(0).gameObject.SetActive(updateColor);
-        blockTransform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+
         if (updateNumber)
         {
             int currentNum = GameUtils.blockNumArr[row, col] + num;
@@ -335,7 +335,7 @@ public class GameMainView : MonoBehaviour
             TextMeshPro textMeshPro = blockTransform.GetChild(1).GetComponent<TextMeshPro>();
             textMeshPro.text = currentNum.ToString();
             textMeshPro.gameObject.SetActive(currentNum != 0);
-            Color newColor = GetColorForNumber(currentNum);
+            Color newColor = GetColorForNumber(type);
             SpriteRenderer spriteRenderer = blockTransform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
             if (spriteRenderer != null)
             {
@@ -348,13 +348,23 @@ public class GameMainView : MonoBehaviour
         }
     }
 
-    private Color GetColorForNumber(int number)
+    private Color GetColorForNumber(GameUtils.RollType type)
     {
-        if (number > 6) number = 6;  // 确保 number 不超过 6
-
+        Color color;
         // 计算 alpha 值
-        int alpha = Mathf.Clamp((number - 1) * 40 + 40, 0, 255);
-        Color color = new Color(1, 1, 1, alpha / 255f);  // 白色但透明度根据 alpha 计算
+
+        if (type == GameUtils.RollType.frozenType)
+        {
+            color = new Color32(205, 233, 236, 100);
+        }
+        else if (type == GameUtils.RollType.fireType)
+        {
+            color = new Color32(183, 57, 57, 100);
+        }
+        else
+        {
+            color = new Color32(255, 176, 5, 100);  // 白色但透明度根据 alpha 计算
+        }
 
         return color;
     }
@@ -381,6 +391,7 @@ public class GameMainView : MonoBehaviour
         {
             return;
         }
+        addBoard.GetComponent<StorageBoardController>().ClearAddBoard();
         GameUtils.isAttack = false;
         //特殊骰子判断逻辑
         // 获取 RollController 和 Enemy 组件
