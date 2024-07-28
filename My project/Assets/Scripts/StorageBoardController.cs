@@ -8,9 +8,13 @@ public class StorageBoardController : MonoBehaviour
 {
     public bool isOccupied = false;
 
+    public bool isOpen = false;
+
     public GameObject roll;
 
     private Sprite sprite;
+
+    private int levelNum = 0;
 
     // 对已经被骰子占用的方格进行标记
     public bool CheckOccupied()
@@ -36,6 +40,8 @@ public class StorageBoardController : MonoBehaviour
         }
         if (GameUtils.UpRound == 2 && gameObject.tag == "Add" && roll != null)
         {
+            levelNum++;
+            gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + levelNum.ToString();
             if (roll.GetComponent<RollController>().num < 6)
             {
                 roll.GetComponent<RollController>().num++;
@@ -93,6 +99,7 @@ public class StorageBoardController : MonoBehaviour
             roll.GetComponent<RollController>().isFrozen = true;
             roll.GetComponent<RollController>().type = GameUtils.RollType.frozenType;
             GameUtils.FrozenRound = 0;
+            roll.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 
@@ -107,6 +114,7 @@ public class StorageBoardController : MonoBehaviour
             roll.GetComponent<RollController>().isFire = true;
             roll.GetComponent<RollController>().type = GameUtils.RollType.fireType;
             GameUtils.FireRound = 0;
+            roll.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
 }

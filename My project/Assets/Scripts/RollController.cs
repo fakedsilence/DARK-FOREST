@@ -298,6 +298,10 @@ public class RollController : MonoBehaviour
     //存储棋盘上骰子
     public void storageRoll(GameObject storageBoard)
     {
+        // if (!storageBoard.GetComponent<StorageBoardController>().isOpen)
+        // {
+        //     return;
+        // }
         int x = selectedObject.GetComponent<RollController>().row;
         int y = selectedObject.GetComponent<RollController>().col;
         moveBlockFalse(selectedObject.GetComponent<RollController>().row, selectedObject.GetComponent<RollController>().col);
@@ -314,6 +318,10 @@ public class RollController : MonoBehaviour
     //使用已经存储起来的骰子
     private void UseStorageRoll(Vector3 worldPos, GameObject storageBoard)
     {
+        // if (!storageBoard.GetComponent<StorageBoardController>().isOpen)
+        // {
+        //     return;
+        // }
         for (int x = 0; x < 6; x++)
         {
             for (int y = 0; y < 5; y++)

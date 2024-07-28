@@ -513,6 +513,9 @@ public class GameMainView : MonoBehaviour
     // 进行下一个回合
     private IEnumerator NextRound()
     {
+        isAddStorage();
+        isFrozenStorage();
+        isFireStorage();
         addBoard.GetComponent<StorageBoardController>().AddBoard();
         frozenBoard.GetComponent<StorageBoardController>().FrozenBoard();
         fireBoard.GetComponent<StorageBoardController>().FireBoard();
@@ -534,7 +537,38 @@ public class GameMainView : MonoBehaviour
         SetBlockColorFalse();
         SetBlockColor();
         UpdateBlockNum();
+        // isAddStorage();
+        // isFrozenStorage();
+        // isFireStorage();
     }
+    #endregion
+
+    #region 判断特殊存储槽是否能够开启
+
+    public void isAddStorage()
+    {
+        if (level >= 8)
+        {
+            addBoard.GetComponent<StorageBoardController>().isOpen = true;
+        }
+    }
+
+    public void isFrozenStorage()
+    {
+        if (level >= 14)
+        {
+            frozenBoard.GetComponent<StorageBoardController>().isOpen = true;
+        }
+    }
+
+    public void isFireStorage()
+    {
+        if (level >= 19)
+        {
+            fireBoard.GetComponent<StorageBoardController>().isOpen = true;
+        }
+    }
+
     #endregion
 
     #region 分数和排行相关
