@@ -90,7 +90,7 @@ public class StorageBoardController : MonoBehaviour
 
     public void ClearAddBoard()
     {
-        if (gameObject.tag == "Add" && roll != null)
+        if (gameObject.tag == "Add" && roll == null)
         {
             levelNum = 0;
             gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + levelNum.ToString();

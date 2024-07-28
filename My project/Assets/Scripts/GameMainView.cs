@@ -51,11 +51,7 @@ public class GameMainView : MonoBehaviour
 
     public UnityEngine.UI.Slider slider;
 
-    private int score;
-
-    public GameObject losePanel;
-
-    public GameObject endScore;
+    public static int score;
 
     void Awake()
     {
@@ -391,7 +387,6 @@ public class GameMainView : MonoBehaviour
         {
             return;
         }
-        addBoard.GetComponent<StorageBoardController>().ClearAddBoard();
         GameUtils.isAttack = false;
         //特殊骰子判断逻辑
         // 获取 RollController 和 Enemy 组件
@@ -439,6 +434,7 @@ public class GameMainView : MonoBehaviour
 
         DelPosRollArr();
         DestroyRoll();
+        addBoard.GetComponent<StorageBoardController>().ClearAddBoard();
 
         // 倒序遍历数组 防止因删除敌人出错
         for (int i = GameUtils.enemysArr.Count - 1; i >= 0; i--)
@@ -613,34 +609,19 @@ public class GameMainView : MonoBehaviour
         }
     }
 
+    #endregion
+
     public void SubmitScore()
     {
         if (slider.value <= 0)
         {
             AccountManager.Instance.SendScore(AccountManager.Instance.UserId, AccountManager.Instance.Password, score);
-            Defeat();
+            ChangeScene();
         }
     }
 
-    #endregion
-
-    #region 
-
-    public void Defeat()
+    private void ChangeScene()
     {
-        losePanel.SetActive(true);
-        endScore.GetComponent<TextMeshPro>().text = score.ToString();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-    public void Restart()
-    {
-        losePanel.SetActive(false);
-    }
-
-    public void Back()
-    {
-        SceneManager.LoadScene("MenuView");
-    }
-
-    #endregion
 }

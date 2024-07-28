@@ -350,6 +350,7 @@ public class RollController : MonoBehaviour
                         chessBoard.GetComponent<GameMainView>().SetBlockColor();
                         chessBoard.GetComponent<GameMainView>().UpdateBlockNum();
                         storageBoard.GetComponent<StorageBoardController>().isOccupied = false;
+                        storageBoard.GetComponent<StorageBoardController>().roll = null;
                         return;
                     }
                 }
