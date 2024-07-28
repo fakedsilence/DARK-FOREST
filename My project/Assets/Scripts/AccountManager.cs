@@ -7,7 +7,7 @@ using System.Text;
 using UnityEngine;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using TMPro.EditorUtilities;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class AccountManager
 {
@@ -128,12 +128,24 @@ public class AccountManager
         });
     }
 
-    public async Task<bool> SendLeaderboardRequest(int uid)
+    public class LeaderboardElement
+    {
+        public string name;
+        public int score;
+        public LeaderboardElement(string name, int score)
+        {
+            this.name = name;
+            this.score = score;
+        }
+    }
+
+
+    public async Task<List<LeaderboardElement>> SendLeaderboardRequest(int uid)
     {
         return await RequestLeaderboard(uid);
     }
 
-    private static async Task<bool> RequestLeaderboard(int uid)
+    private static async Task<List<LeaderboardElement>> RequestLeaderboard(int uid)
     {
 
         // 创建请求模型
@@ -153,23 +165,21 @@ public class AccountManager
             var errorMessage = await response.Content.ReadAsStringAsync();
             MenuView.ShowPopup("无法获取排行榜", $"{response.StatusCode}: {errorMessage}");
 
-            return false;
+            return new List<LeaderboardElement>();
         }
 
         var responseString = await response.Content.ReadAsStringAsync();
         var responseObject = JsonConvert.DeserializeObject<LeaderboardResponseModel>(responseString);
 
         // 打印服务器返回的结果
-        List<string> names = new List<string>();
-        List<int> scores = new List<int>();
+        List<LeaderboardElement> result = new List<LeaderboardElement>();
 
         foreach (var player in responseObject.TopPlayers)
         {
-            names.Add(player.Username);
-            scores.Add(player.HighScore);
+            result.Add(new LeaderboardElement(player.Username, player.HighScore));
         }
-        AccountManager.Instance.Menu.UpdateLeaderboard(names.ToArray(), scores.ToArray());
-        return true;
+
+        return result;
     }
 
 

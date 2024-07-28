@@ -41,7 +41,7 @@ public class MenuView : MonoBehaviour
             {
                 return "";
             }
-            return userName.text;
+            return userName.text.Substring(0, userName.text.Length - 1);
         }
     }
 
@@ -53,7 +53,7 @@ public class MenuView : MonoBehaviour
             {
                 return "";
             }
-            return password.text;
+            return password.text.Substring(0, password.text.Length - 1);
         }
     }
 
