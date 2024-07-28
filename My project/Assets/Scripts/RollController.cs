@@ -111,7 +111,7 @@ public class RollController : MonoBehaviour
                         worldPos.z = selectedObject.transform.position.z;
                         for (int i = 0; i < storageBoard.Length; i++)
                         {
-                            if (Vector2.Distance(worldPos, storageBoard[i].transform.position) <= 40 && !storageBoard[i].GetComponent<StorageBoardController>().isOccupied)
+                            if (Vector2.Distance(worldPos, storageBoard[i].transform.position) <= 25 && !storageBoard[i].GetComponent<StorageBoardController>().isOccupied)
                             {
                                 if (previousStorageBoard != null && previousStorageBoard != storageBoard[i])
                                 {

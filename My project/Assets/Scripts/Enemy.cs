@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour
 
     private Sprite sprite;
 
+    private Animator anim;
+
     private int hpScore;
 
 
@@ -64,8 +66,23 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("资源不存在");
         }
+
+        if (File.Exists(Path.Combine(Application.dataPath, "Resources/Animation/Enemy/" + type.ToString() + ".controller")))
+        {
+            Animator anim = GetComponent<Animator>();
+            if (anim == null)
+            {
+                anim = gameObject.AddComponent<Animator>();
+            }
+            anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animation/Enemy/" + type.ToString());
+        }
+        else
+        {
+            Debug.Log("资源不存在");
+        }
         UpdateHP();
     }
+
 
     // 敌人的攻击逻辑
     public void Attack()

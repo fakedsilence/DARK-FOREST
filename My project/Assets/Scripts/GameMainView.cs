@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Android;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
@@ -51,6 +52,10 @@ public class GameMainView : MonoBehaviour
     public UnityEngine.UI.Slider slider;
 
     private int score;
+
+    public GameObject losePanel;
+
+    public GameObject endScore;
 
     void Awake()
     {
@@ -322,6 +327,7 @@ public class GameMainView : MonoBehaviour
             return;
         }
         blockTransform.GetChild(0).gameObject.SetActive(updateColor);
+        blockTransform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         if (updateNumber)
         {
             int currentNum = GameUtils.blockNumArr[row, col] + num;
@@ -600,8 +606,28 @@ public class GameMainView : MonoBehaviour
     {
         if (slider.value <= 0)
         {
-
+            Defeat();
         }
+    }
+
+    #endregion
+
+    #region 
+
+    public void Defeat()
+    {
+        losePanel.SetActive(true);
+        endScore.GetComponent<TextMeshPro>().text = score.ToString();
+    }
+
+    public void Restart()
+    {
+        losePanel.SetActive(false);
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene("MenuView");
     }
 
     #endregion
