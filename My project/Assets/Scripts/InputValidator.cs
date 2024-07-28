@@ -24,14 +24,14 @@ public class InputValidator : MonoBehaviour
     {
         Debug.Log($"{text} {charIndex} {addedChar}");
 
-        // ¼ì²é×Ö·ûÊÇ·ñÊÇ ASCII ·¶Î§ÄÚµÄ×ÖÄ¸»òÊı×Ö
+        // æ£€æŸ¥å­—ç¬¦æ˜¯å¦æ˜¯ ASCII èŒƒå›´å†…çš„å­—æ¯æˆ–æ•°å­—
         if (char.IsLetterOrDigit(addedChar) && addedChar < 128)
         {
             tmp.text = text + addedChar;
             return addedChar;
         }
-        MenuView.Instance.ShowPopup("ÃÜÂëÖ»ÄÜ°üº¬Ó¢ÎÄ×ÖÄ¸ºÍÊı×Ö");
-        return '\0';  // ·µ»Ø¿Õ×Ö·û£¬±íÊ¾²»½ÓÊÜÕâ¸ö×Ö·û
+        MenuView.Instance.ShowPopup("å¯†ç åªèƒ½åŒ…å«è‹±æ–‡å­—æ¯å’Œæ•°å­—");
+        return '\0';  // è¿”å›ç©ºå­—ç¬¦ï¼Œè¡¨ç¤ºä¸æ¥å—è¿™ä¸ªå­—ç¬¦
     }
 
     void OnDestroy()
