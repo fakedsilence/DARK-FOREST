@@ -50,6 +50,8 @@ public class GameMainView : MonoBehaviour
 
     public UnityEngine.UI.Slider slider;
 
+    private int score;
+
     void Awake()
     {
         levelArr = new int[] { 1, 8, 14, 19, 27, 34, 45 };
@@ -539,7 +541,7 @@ public class GameMainView : MonoBehaviour
     // 消灭敌人后增加分数
     public void AddScore(int hpScore)
     {
-        int score = int.Parse(curScoreObj.GetComponent<TextMeshPro>().text);
+        score = int.Parse(curScoreObj.GetComponent<TextMeshPro>().text);
         score += hpScore;
         curScoreObj.GetComponent<TextMeshPro>().text = score.ToString();
     }

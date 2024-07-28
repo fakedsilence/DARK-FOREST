@@ -21,6 +21,12 @@ public class MenuView : MonoBehaviour
 
     public GameObject rankPanel;
 
+    public GameObject bgPanel;
+
+    public GameObject tips;
+
+    public GameObject mainMenu;
+
     public GameObject[] rankArr;
 
     private void Start()
@@ -81,13 +87,13 @@ public class MenuView : MonoBehaviour
                 }
                 else
                 {
-                    
                     Debug.LogError("Account creation failed");
                 }
             }).ContinueWith(t =>
             {
-                
-
+                loginPanel.SetActive(false);
+                bgPanel.SetActive(false);
+                mainMenu.SetActive(true);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
@@ -107,22 +113,24 @@ public class MenuView : MonoBehaviour
                 }
                 else
                 {
-                    
                     Debug.LogError("login failed");
                 }
             }).ContinueWith(t =>
             {
-                if(canLogin)
+                if (canLogin)
                 {
                     loginPanel.SetActive(false);
+                    bgPanel.SetActive(false);
+                    mainMenu.SetActive(true);
                 }
-                
+
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
 
-    public static void ShowPopup(string title, string message)
+    public void ShowPopup(string message)
     {
+        tips.GetComponent<TextMeshProUGUI>().text = message;
         //to be completed
         return;
     }
@@ -151,7 +159,6 @@ public class MenuView : MonoBehaviour
     public void UpdateLeaderboard(List<string> playerNames, List<int> scores)
     {
         rankPanel.SetActive(true);
-
         // 生成新的排行榜项
         for (int i = 0; i < rankArr.Length; i++)
         {
