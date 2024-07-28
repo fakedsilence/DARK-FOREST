@@ -72,16 +72,17 @@ public class MenuView : MonoBehaviour
     {
         if (usernameString.Length > 2 && passwordString.Length > 2)
         {
-            Task tsk = AccountManager.Instance.SendCreateAccount(usernameString, passwordString, usernameString);
+            Task<bool> tsk = AccountManager.Instance.SendCreateAccount(usernameString, passwordString, usernameString);
             tsk.ContinueWith(t =>
             {
-                if (t.IsFaulted)
+                if (t.Result)
                 {
-                    Debug.LogError("Account creation failed");
+                    Debug.Log("Account creation success");
                 }
                 else
                 {
-                    Debug.Log("Account creation success");
+                    
+                    Debug.LogError("Account creation failed");
                 }
             }).ContinueWith(t =>
             {
@@ -95,18 +96,19 @@ public class MenuView : MonoBehaviour
     {
         if (usernameString.Length > 2 && passwordString.Length > 2)
         {
-            Task tsk = AccountManager.Instance.SendLogin(usernameString, passwordString);
+            Task<bool> tsk = AccountManager.Instance.SendLogin(usernameString, passwordString);
             bool canLogin = false;
             tsk.ContinueWith(t =>
             {
-                if (t.IsFaulted)
-                {
-                    Debug.LogError("login failed");
-                }
-                else
+                if (t.Result)
                 {
                     Debug.Log("login success");
                     canLogin = true;
+                }
+                else
+                {
+                    
+                    Debug.LogError("login failed");
                 }
             }).ContinueWith(t =>
             {

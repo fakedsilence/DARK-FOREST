@@ -217,7 +217,7 @@ public class AccountManager
 
         var response = await client.PostAsync("Scores/createAccount", content);
 
-        response.EnsureSuccessStatusCode();
+
 
         if (!response.IsSuccessStatusCode)
         {
