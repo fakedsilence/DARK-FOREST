@@ -95,13 +95,13 @@ public class AccountManager
 
     public async Task<bool> SendLogin(string userName, string password)
     {
-        bool success =  await LoginAsync(new
+        bool success = await LoginAsync(new
         {
             Username = userName,
             Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(password)), // base64 encoding
             LoginDate = DateTime.UtcNow
         });
-        if(success)
+        if (success)
         {
             AccountManager.Instance.Username = userName;
             AccountManager.Instance.Password = password;
@@ -167,8 +167,8 @@ public class AccountManager
         if (!response.IsSuccessStatusCode)
         {
             var errorMessage = await response.Content.ReadAsStringAsync();
-            MenuView.ShowPopup("无法获取排行榜", $"{response.StatusCode}: {errorMessage}");
-
+            MenuView.Instance.ShowPopup("无法获取排行榜");
+            // +$"{response.StatusCode}: {errorMessage}"
             return new List<LeaderboardElement>();
         }
 
@@ -197,14 +197,14 @@ public class AccountManager
         if (!response.IsSuccessStatusCode)
         {
             var errorMessage = await response.Content.ReadAsStringAsync();
-            MenuView.ShowPopup("无法提交分数", $"{response.StatusCode}: {errorMessage}");
-
+            MenuView.Instance.ShowPopup("无法提交分数");
+            //  + $"{response.StatusCode}: {errorMessage}"
             return false;
         }
 
         var responseString = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<RankResponse>(responseString);
-        MenuView.ShowPopup("信息", $"分数上传成功!\n新的排名: #{result.rank}");
+        MenuView.Instance.ShowPopup($"分数上传成功!\n新的排名: #{result.rank}");
         return true;
     }
 
@@ -223,13 +223,14 @@ public class AccountManager
         {
             Debug.Log("Failure");
             var errorMessage = await response.Content.ReadAsStringAsync();
-            MenuView.ShowPopup("无法创建账号", $"{response.StatusCode}: {errorMessage}");
+            MenuView.Instance.ShowPopup("无法创建账号: ");
+            //  + $"{response.StatusCode}: {errorMessage}"
             Debug.Log("无法创建账号{response.StatusCode}: {errorMessage}");
             return false;
         }
         Debug.Log("Success");
         var responseString = await response.Content.ReadAsStringAsync();
-        MenuView.ShowPopup("信息", "创建账号成功");
+        MenuView.Instance.ShowPopup("创建账号成功");
         Debug.Log("信息 创建账号成功");
         return true;
     }
@@ -259,17 +260,18 @@ public class AccountManager
             else
             {
                 // 处理不同的错误状态码
-               
-                
-                    var errorMessage = await response.Content.ReadAsStringAsync();
-                    MenuView.ShowPopup("无法登录", $"{response.StatusCode}: {errorMessage}");
-                    Debug.Log($"无法登陆{response.StatusCode}: {errorMessage}");
 
-                    return false;
-               
+
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                MenuView.Instance.ShowPopup("无法登录: ");
+                // +$"{response.StatusCode}: {errorMessage}"
+                Debug.Log($"无法登陆{response.StatusCode}: {errorMessage}");
+
+                return false;
+
             }
         }
-        
+
         catch (HttpRequestException e)
         {
             Debug.Log($"Request error: {e.Message}");
