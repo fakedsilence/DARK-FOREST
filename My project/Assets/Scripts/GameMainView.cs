@@ -371,6 +371,11 @@ public class GameMainView : MonoBehaviour
     // 玩家点击攻击
     private void PlayAttack()
     {
+        if (!GameUtils.isAttack)
+        {
+            return;
+        }
+        GameUtils.isAttack = false;
         //特殊骰子判断逻辑
         // 获取 RollController 和 Enemy 组件
         for (int i = 0; i < GameUtils.rollsArr.Count; i++)

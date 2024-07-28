@@ -38,6 +38,8 @@ public class GameUtils
 
     public static int FireRound = 0;
 
+    public static bool isAttack = false;
+
     // 随机创建1~6出三个随机数的数组
     public static int[] CreateRandomNum()
     {

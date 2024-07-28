@@ -291,6 +291,8 @@ public class RollController : MonoBehaviour
         transform.position = end; // 确保物体移动到完全的结束位置
         gameObject.GetComponent<Animator>().SetBool("isStop", true);
         isMoving = false;  // 移动结束时设置为false
+        yield return new WaitForSeconds(1f);
+        GameUtils.isAttack = true;  //能够点击攻击按键
     }
 
     #region 存储槽逻辑
