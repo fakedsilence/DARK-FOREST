@@ -234,7 +234,7 @@ public class AccountManager
     {
         var json = JsonConvert.SerializeObject(data);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
-
+        Debug.Log("wow");
         try
         {
             var response = await client.PostAsync("Scores/login", content);
@@ -252,20 +252,24 @@ public class AccountManager
             else
             {
                 // 处理不同的错误状态码
-                if (!response.IsSuccessStatusCode)
-                {
+               
+                
                     var errorMessage = await response.Content.ReadAsStringAsync();
                     MenuView.ShowPopup("无法登录", $"{response.StatusCode}: {errorMessage}");
                     Debug.Log($"无法登陆{response.StatusCode}: {errorMessage}");
 
                     return false;
-                }
+               
             }
         }
         catch (HttpRequestException e)
         {
             Console.WriteLine($"Request error: {e.Message}");
             // 处理请求异常逻辑
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Request error: {e.Message}");
         }
         return true;
     }
