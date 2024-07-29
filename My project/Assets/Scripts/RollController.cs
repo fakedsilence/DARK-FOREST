@@ -25,7 +25,7 @@ public class RollController : MonoBehaviour
     public GameUtils.RollType type;
 
     [SerializeField]
-    private float speed = 500f;  // 初始速度
+    private float speed = 1000f;  // 初始速度
 
     private bool isMoving = false;  // 用于跟踪骰子是否正在移动
 
@@ -35,7 +35,7 @@ public class RollController : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(-500, 0, 0);
+        transform.position = new Vector3(-580, 0, 0);
         StartParabolaMove();
     }
 

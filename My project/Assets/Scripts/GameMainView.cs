@@ -503,10 +503,22 @@ public class GameMainView : MonoBehaviour
     // }
 
     #region 回合逻辑
+
+    private void roundEffect()
+    {
+        for (int i = 0; i < levelArr.Length; i++)
+        {
+            if (level == levelArr[i])
+            {
+                soundEffect[0].Play();
+            }
+        }
+    }
+
     // 开始第一个回合
     private IEnumerator PlayFirstRound()
     {
-        soundEffect[0].Play();
+        roundEffect();
         CreateEnemy();
         yield return new WaitForSeconds(1f);
         CreateRoll();  //for test 
@@ -534,7 +546,7 @@ public class GameMainView : MonoBehaviour
     // 进行下一个回合
     private IEnumerator NextRound()
     {
-        soundEffect[0].Play();
+        roundEffect();
         isAddStorage();
         isFrozenStorage();
         isFireStorage();
