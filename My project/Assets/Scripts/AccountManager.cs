@@ -209,7 +209,7 @@ public class AccountManager : MonoBehaviour
 
         var responseString = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<RankResponse>(responseString);
-        MenuView.Instance.ShowPopup($"分数上传成功!\n新的排名: #{result.rank}");
+        //MenuView.Instance.ShowPopup($"分数上传成功!\n新的排名: #{result.rank}");
         return true;
     }
 

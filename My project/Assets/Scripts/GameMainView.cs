@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ExcelDataReader;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Android;
@@ -578,7 +579,7 @@ public class GameMainView : MonoBehaviour
     // 轮到AI的回合
     private IEnumerator PlayAIRound()
     {
-        SubmitScore();
+        SubmitScore(true);
         SetBlockNum();
         SetBlockColorFalse();
         SetBlockColor();
@@ -675,13 +676,39 @@ public class GameMainView : MonoBehaviour
 
     #endregion
 
-    public void SubmitScore()
+    public void SubmitScore(bool shouldJump)
     {
-        if (slider.value <= 0)
+        if(shouldJump)
+        {
+            if (slider != null && slider.value <= 0)
+            {
+                AccountManager.Instance.SendScore(AccountManager.Instance.UserId, AccountManager.Instance.Password, score);
+                ChangeScene();
+
+            }
+        }
+        else
         {
             AccountManager.Instance.SendScore(AccountManager.Instance.UserId, AccountManager.Instance.Password, score);
-            ChangeScene();
         }
+        // 提交得分的逻辑
+        // 确保在任何时候调用这个方法都不会导致异常
+        
+    }
+
+    void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            Debug.Log("paused, submit score");
+            SubmitScore(false);
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        Debug.Log("game killed, submit score");
+        SubmitScore(false);
     }
 
     private void ChangeScene()
