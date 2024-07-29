@@ -10,6 +10,12 @@ public class StorageBoardController : MonoBehaviour
 
     public bool isOpen = false;
 
+    public bool isAdd = false;
+
+    public bool isFrozen = false;
+
+    public bool isFire = false;
+
     public GameObject roll;
 
     private Sprite sprite;
@@ -34,11 +40,11 @@ public class StorageBoardController : MonoBehaviour
 
     public void AddBoard()
     {
-        if (gameObject.tag == "Add" && roll != null)
+        if (gameObject.tag == "Add" && isAdd)
         {
             GameUtils.UpRound++;
         }
-        if (GameUtils.UpRound == 2 && gameObject.tag == "Add" && roll != null)
+        if (GameUtils.UpRound == 2 && gameObject.tag == "Add" && isAdd)
         {
             if (roll.GetComponent<RollController>().num < 6)
             {
@@ -75,7 +81,7 @@ public class StorageBoardController : MonoBehaviour
 
     public void ClearAddBoard()
     {
-        if (gameObject.tag == "Add" && roll == null)
+        if (gameObject.tag == "Add" && !isAdd)
         {
             levelNum = 0;
             gameObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+" + levelNum.ToString();
@@ -84,11 +90,11 @@ public class StorageBoardController : MonoBehaviour
 
     public void FrozenBoard()
     {
-        if (gameObject.tag == "Frozen" && roll != null)
+        if (gameObject.tag == "Frozen" && isFrozen)
         {
             GameUtils.FrozenRound++;
         }
-        if (GameUtils.FrozenRound == 2 && gameObject.tag == "Frozen" && roll != null)
+        if (GameUtils.FrozenRound == 2 && gameObject.tag == "Frozen" && isFrozen)
         {
             roll.GetComponent<RollController>().isFrozen = true;
             roll.GetComponent<RollController>().type = GameUtils.RollType.frozenType;
@@ -99,11 +105,11 @@ public class StorageBoardController : MonoBehaviour
 
     public void FireBoard()
     {
-        if (gameObject.tag == "Fire" && roll != null)
+        if (gameObject.tag == "Fire" && isFire)
         {
             GameUtils.FireRound++;
         }
-        if (GameUtils.FireRound == 2 && gameObject.tag == "Fire" && roll != null)
+        if (GameUtils.FireRound == 2 && gameObject.tag == "Fire" && isFire)
         {
             roll.GetComponent<RollController>().isFire = true;
             roll.GetComponent<RollController>().type = GameUtils.RollType.fireType;
