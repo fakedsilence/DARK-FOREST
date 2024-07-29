@@ -158,7 +158,11 @@ public class RollController : MonoBehaviour
                 bool alreadyChosen = GameUtils.findPos(x, y);
                 string blockName = "block_" + x.ToString() + y.ToString();
                 Transform blockTransform = chessBoard.transform.Find(blockName);
-                if (blockTransform != null && !alreadyChosen && Vector2.Distance(worldPos, blockTransform.position) <= 25)
+                if ((row == 0 && blockTransform != null && !alreadyChosen && Vector2.Distance(worldPos, blockTransform.position) <= 35)
+                || row == 1 && blockTransform != null && !alreadyChosen && Vector2.Distance(worldPos, blockTransform.position) <= 35
+                || row == 2 && blockTransform != null && !alreadyChosen && Vector2.Distance(worldPos, blockTransform.position) <= 25
+                || row == 3 && blockTransform != null && !alreadyChosen && Vector2.Distance(worldPos, blockTransform.position) <= 25
+                || row == 4 && blockTransform != null && !alreadyChosen && Vector2.Distance(worldPos, blockTransform.position) <= 25)
                 {
                     GameUtils.updatePos(selectedObject.GetComponent<RollController>().row, selectedObject.GetComponent<RollController>().col, x, y);
                     moveBlockFalse(selectedObject.GetComponent<RollController>().row, selectedObject.GetComponent<RollController>().col);

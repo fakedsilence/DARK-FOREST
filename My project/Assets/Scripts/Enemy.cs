@@ -48,6 +48,12 @@ public class Enemy : MonoBehaviour
 
     public GameObject enemy;
 
+    public GameObject endPos;
+
+    public GameObject bullet;
+
+    private GameObject newBullet;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -78,18 +84,27 @@ public class Enemy : MonoBehaviour
         UpdateHP();
     }
 
-
     // 敌人的攻击逻辑
     public void Attack()
     {
         if (type == 5)
         {
-            chessBoard.GetComponent<GameMainView>().slider.value -= damage;
+            StartCoroutine(HideTipsAfterDelay(0.5f));
         }
         if (row == 0)
         {
             chessBoard.GetComponent<GameMainView>().slider.value -= damage;
         }
+    }
+
+    IEnumerator HideTipsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        chessBoard.GetComponent<GameMainView>().slider.value -= damage;
+        newBullet = Instantiate(bullet);
+        newBullet.transform.position = bullet.transform.position;
+        newBullet.SetActive(true);
+        StartCoroutine(MoveBullet(endPos.transform.position));
     }
 
     // 特殊敌人生成时的处理
@@ -238,5 +253,25 @@ public class Enemy : MonoBehaviour
 
         // 确保最后位置精确设置为目标位置
         transform.position = target;
+    }
+
+    IEnumerator MoveBullet(Vector3 target)
+    {
+        Vector3 startPosition = newBullet.transform.position;
+        float journey = 0f;
+        float duration = 1f; // 移动所需时间，可以根据需要调整
+
+        while (journey < duration)
+        {
+            journey += Time.deltaTime;
+            float percent = Mathf.Clamp01(journey / duration);
+            newBullet.transform.position = Vector3.Lerp(startPosition, target, percent);
+            yield return null;
+        }
+
+        // 确保最后位置精确设置为目标位置
+
+        newBullet.transform.position = target;
+        Destroy(newBullet);
     }
 }
