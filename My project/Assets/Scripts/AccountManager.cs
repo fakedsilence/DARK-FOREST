@@ -110,7 +110,6 @@ public class AccountManager : MonoBehaviour
             int highestScore = (await AccountManager.GetHighestScoreAsync(UserId)).Value;
             Debug.Log($"High score: {highestScore}");
             GameMainView.onlineScore = highestScore;
-            GameMainView.onlineScore = 114;
         }
         return success;
     }
@@ -320,11 +319,13 @@ public class AccountManager : MonoBehaviour
             if (!response.IsSuccessStatusCode)
             {
                 var errorMessage = await response.Content.ReadAsStringAsync();
+                Debug.Log(errorMessage);
                 MenuView.Instance.ShowPopup($"无法获取最高分\n状态码: {response.StatusCode}\n错误信息: {errorMessage}");
                 return null;
             }
 
             var responseString = await response.Content.ReadAsStringAsync();
+            Debug.Log(responseString);
             var responseObject = JsonConvert.DeserializeObject<HighestScoreResponse>(responseString);
             return responseObject.HighScore;
         }
@@ -371,8 +372,13 @@ public class AccountManager : MonoBehaviour
 
     public class HighestScoreResponse
     {
+        [JsonProperty("state")]
         public string State { get; set; }
+
+        [JsonProperty("UID")]
         public int UID { get; set; }
+
+        [JsonProperty("highScore")]
         public int HighScore { get; set; }
     }
 }
