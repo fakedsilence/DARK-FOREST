@@ -42,7 +42,9 @@ public class Enemy : MonoBehaviour
 
     private int hpScore;
 
+    public Sprite[] sprites;
 
+    public RuntimeAnimatorController[] anims;
 
     private void Awake()
     {
@@ -61,30 +63,16 @@ public class Enemy : MonoBehaviour
     // 初始化被创建出来的敌人
     public void Initialize()
     {
-        if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Enemy_" + type.ToString() + ".png")))
-        {
-            sprite = Resources.Load<Sprite>("Arts/Enemy_" + type.ToString());
-            GetComponent<SpriteRenderer>().sprite = sprite;
-            hpScore = hp;
-        }
-        else
-        {
-            Debug.Log("资源不存在");
-        }
+        GetComponent<SpriteRenderer>().sprite = sprites[type];
+        hpScore = hp;
 
-        if (File.Exists(Path.Combine(Application.dataPath, "Resources/Animation/Enemy/" + type.ToString() + ".controller")))
+        Animator anim = GetComponent<Animator>();
+        if (anim == null)
         {
-            Animator anim = GetComponent<Animator>();
-            if (anim == null)
-            {
-                anim = gameObject.AddComponent<Animator>();
-            }
-            anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animation/Enemy/" + type.ToString());
+            anim = gameObject.AddComponent<Animator>();
         }
-        else
-        {
-            Debug.Log("资源不存在");
-        }
+        anim.runtimeAnimatorController = anims[type];
+
         UpdateHP();
     }
 

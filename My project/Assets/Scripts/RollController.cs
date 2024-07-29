@@ -33,6 +33,12 @@ public class RollController : MonoBehaviour
 
     private Sprite sprite;
 
+    public Sprite[] blackSprite;
+
+    public Sprite[] blueSprite;
+
+    public Sprite[] silverSprite;
+
     void Start()
     {
         transform.position = new Vector3(-580, 0, 0);
@@ -43,40 +49,20 @@ public class RollController : MonoBehaviour
     {
         if (type == GameUtils.RollType.rowType)
         {
-            if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/black/black" + num.ToString() + ".png")))
-            {
-                sprite = Resources.Load<Sprite>("Arts/Rolls/black/black" + num.ToString());
-                GetComponent<SpriteRenderer>().sprite = sprite;
-            }
-            else
-            {
-                Debug.Log("资源不存在");
-            }
+            sprite = blackSprite[num - 1];
+            GetComponent<SpriteRenderer>().sprite = sprite;
+
         }
         else if (type == GameUtils.RollType.colType)
         {
-            if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/blue/blue" + num.ToString() + ".png")))
-            {
-                sprite = Resources.Load<Sprite>("Arts/Rolls/blue/blue" + num.ToString());
-                GetComponent<SpriteRenderer>().sprite = sprite;
-            }
-            else
-            {
-                Debug.Log("资源不存在");
-            }
+            sprite = blueSprite[num - 1];
+            GetComponent<SpriteRenderer>().sprite = sprite;
         }
         else
         {
-            if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/silver/silver" + num.ToString() + ".png")))
-            {
-                sprite = Resources.Load<Sprite>("Arts/Rolls/silver/silver" + num.ToString());
-                GetComponent<SpriteRenderer>().sprite = sprite;
-            }
-            else
-            {
-                Debug.Log("资源不存在");
-            }
+            sprite = silverSprite[num - 1];
         }
+        GetComponent<SpriteRenderer>().sprite = sprite;
     }
 
     private void FixedUpdate()

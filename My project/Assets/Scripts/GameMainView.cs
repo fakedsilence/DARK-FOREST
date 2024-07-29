@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using ExcelDataReader;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.TextCore.Text;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Android;
@@ -82,11 +81,10 @@ public class GameMainView : MonoBehaviour
 
     }
 
-
-
     void Start()
     {
-        string filePath = Application.streamingAssetsPath + "/Config/EnemySpawn.csv";
+        Retry();
+        string filePath = Application.streamingAssetsPath + "/Config/EnemySpawn.txt";
         StartCoroutine(ReadCSVFile(filePath));
         StartCoroutine(PlayFirstRound());
     }
@@ -131,7 +129,7 @@ public class GameMainView : MonoBehaviour
 
     private IEnumerator ReadCSVFile(string filePath)
     {
-        string result = "";
+        string result;
         if (filePath.Contains("://") || filePath.Contains(":///"))
         {
             UnityWebRequest www = UnityWebRequest.Get(filePath);
@@ -438,6 +436,7 @@ public class GameMainView : MonoBehaviour
         {
             return;
         }
+        attackEffect();
         GameUtils.isAttack = false;
         //特殊骰子判断逻辑
         // 获取 RollController 和 Enemy 组件
@@ -562,9 +561,21 @@ public class GameMainView : MonoBehaviour
                 soundEffect[0].Play();
                 tips.SetActive(true);
                 tips.GetComponent<TextMeshProUGUI>().text = stringArr[i];
+                StartCoroutine(HideTipsAfterDelay(2f));
                 break;
             }
         }
+    }
+
+    private IEnumerator HideTipsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        tips.SetActive(false);
+    }
+
+    private void attackEffect()
+    {
+        soundEffect[1].Play();
     }
 
     // 开始第一个回合
@@ -581,7 +592,6 @@ public class GameMainView : MonoBehaviour
     // 轮到AI的回合
     private IEnumerator PlayAIRound()
     {
-        SubmitScore(true);
         SetBlockNum();
         SetBlockColorFalse();
         SetBlockColor();
@@ -625,6 +635,7 @@ public class GameMainView : MonoBehaviour
         // isAddStorage();
         // isFrozenStorage();
         // isFireStorage();
+        SubmitScore(true);
     }
     #endregion
 
@@ -686,7 +697,6 @@ public class GameMainView : MonoBehaviour
             {
                 AccountManager.Instance.SendScore(AccountManager.Instance.UserId, AccountManager.Instance.Password, score);
                 ChangeScene();
-
             }
         }
         else
@@ -696,6 +706,21 @@ public class GameMainView : MonoBehaviour
         // 提交得分的逻辑
         // 确保在任何时候调用这个方法都不会导致异常
 
+    }
+
+    public void Retry()
+    {
+        GameUtils.rollsArr.Clear();
+        GameUtils.posArr.Clear();
+        GameUtils.enemysArr.Clear();
+        for (int i = 0; i < GameUtils.blockNumArr.GetLength(0); i++)
+        {
+            for (int j = 0; j < GameUtils.blockNumArr.GetLength(1); j++)
+            {
+                GameUtils.blockNumArr[i, j] = 0;
+            }
+        }
+        slider.value = 10;
     }
 
     void OnApplicationPause(bool pauseStatus)
@@ -715,6 +740,6 @@ public class GameMainView : MonoBehaviour
 
     private void ChangeScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("DeathView");
     }
 }

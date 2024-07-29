@@ -49,39 +49,24 @@ public class StorageBoardController : MonoBehaviour
                 GameUtils.RollType type = roll.GetComponent<RollController>().type;
                 if (type == GameUtils.RollType.rowType)
                 {
-                    if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/black/black" + num.ToString() + ".png")))
-                    {
-                        sprite = Resources.Load<Sprite>("Arts/Rolls/black/black" + num.ToString());
-                        roll.GetComponent<SpriteRenderer>().sprite = sprite;
-                    }
-                    else
-                    {
-                        Debug.Log("资源不存在");
-                    }
+
+                    sprite = Resources.Load<Sprite>("Arts/Rolls/black/black" + num.ToString());
+                    roll.GetComponent<SpriteRenderer>().sprite = sprite;
+
                 }
                 else if (type == GameUtils.RollType.colType)
                 {
-                    if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/blue/blue" + num.ToString() + ".png")))
-                    {
-                        sprite = Resources.Load<Sprite>("Arts/Rolls/blue/blue" + num.ToString());
-                        roll.GetComponent<SpriteRenderer>().sprite = sprite;
-                    }
-                    else
-                    {
-                        Debug.Log("资源不存在");
-                    }
+
+                    sprite = Resources.Load<Sprite>("Arts/Rolls/blue/blue" + num.ToString());
+                    roll.GetComponent<SpriteRenderer>().sprite = sprite;
+
                 }
                 else
                 {
-                    if (File.Exists(Path.Combine(Application.dataPath, "Resources/Arts/Rolls/silver/silver" + num.ToString() + ".png")))
-                    {
-                        sprite = Resources.Load<Sprite>("Arts/Rolls/silver/silver" + num.ToString());
-                        roll.GetComponent<SpriteRenderer>().sprite = sprite;
-                    }
-                    else
-                    {
-                        Debug.Log("资源不存在");
-                    }
+
+                    sprite = Resources.Load<Sprite>("Arts/Rolls/silver/silver" + num.ToString());
+                    roll.GetComponent<SpriteRenderer>().sprite = sprite;
+
                 }
             }
             GameUtils.UpRound = 0;
