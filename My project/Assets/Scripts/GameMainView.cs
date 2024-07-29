@@ -34,13 +34,9 @@ public class GameMainView : MonoBehaviour
 
     public GameObject[,] blocks;
 
-    private int level = 0;
+    private int level = 1;
 
     public GameObject enemyPos;
-
-    private string isSpawn = null;
-
-    private int beginLevel = 0;
 
     private int[] levelArr;
 
@@ -67,6 +63,8 @@ public class GameMainView : MonoBehaviour
     public static int highScore;
 
     private string[] lines;
+
+    private bool isSpawn = false;
 
     // 确保该实例在场景加载时的唯一性
     void Awake()
@@ -185,26 +183,30 @@ public class GameMainView : MonoBehaviour
         }
         if (GameUtils.enemysArr.Count == 0)
         {
+            isSpawn = false;
             for (int index = 0; index < 2; index++)
             {
-                level++;
                 List<string> data = GameUtils.ConvertToMatrix(lines[level]);
+                if (data.Count > 3 && index == 1)
+                {
+                    isSpawn = true;
+                    return;
+                }
+                if (data.Count > 3 && index == 0)
+                {
+                    isSpawn = true;
+                    index++; //如果没兵 读到isspawn 只读一列
+                }
+
                 roundEffect();
 
-                isSpawn = data.Count > 3 ? data[3] : null;
-                string flag = data.Count > 4 ? data[4] : null;
-
-                if (flag != "" && index != 1)
-                {
-                    level = levelArr[++beginLevel];
-                }
-                int[] type = GameUtils.ParseIntArray1D(data[0]);
+                int[] type = GameUtils.ParseIntArray1D(data.Count > 0 ? data[0] : null);
                 if (type.Length == 0)
                 {
                     break;
                 }
-                int[][] hp = GameUtils.ParseIntArray2D(data[1]);
-                int[] pos = GameUtils.ParseIntArray1D(data[2]);
+                int[][] hp = GameUtils.ParseIntArray2D(data.Count > 1 ? data[1] : null);
+                int[] pos = GameUtils.ParseIntArray1D(data.Count > 2 ? data[2] : null);
 
                 for (int i = 0; i < type.Length; i++)
                 {
@@ -214,20 +216,24 @@ public class GameMainView : MonoBehaviour
                     GameUtils.enemysArr.Add(newEnemy);
                     GameUtils.posArr.Add(new List<int> { newEnemy.GetComponent<Enemy>().row, newEnemy.GetComponent<Enemy>().col });
                 }
+                level++;
             }
         }
         else
         {
             List<string> data = GameUtils.ConvertToMatrix(lines[level]);
-            isSpawn = data.Count > 3 ? data[3] : null;
-            if (isSpawn != "" || isCreate())
+            if (isSpawn)
             {
                 return;
             }
-            level++;
-            int[] type = GameUtils.ParseIntArray1D(data[0]);
-            int[][] hp = GameUtils.ParseIntArray2D(data[1]);
-            int[] pos = GameUtils.ParseIntArray1D(data[2]);
+            if (data.Count == 1 || data.Count > 3)
+            {
+                isSpawn = true;  //如果有兵 读到isspawn 
+            }
+            roundEffect();
+            int[] type = GameUtils.ParseIntArray1D(data.Count > 0 ? data[0] : null);
+            int[][] hp = GameUtils.ParseIntArray2D(data.Count > 1 ? data[1] : null);
+            int[] pos = GameUtils.ParseIntArray1D(data.Count > 2 ? data[2] : null);
 
             for (int i = 0; i < type.Length; i++)
             {
@@ -237,6 +243,7 @@ public class GameMainView : MonoBehaviour
                 GameUtils.enemysArr.Add(newEnemy);
                 GameUtils.posArr.Add(new List<int> { newEnemy.GetComponent<Enemy>().row, newEnemy.GetComponent<Enemy>().col });
             }
+            level++;
         }
     }
 

@@ -302,19 +302,23 @@ public class RollController : MonoBehaviour
         storageBoard.GetComponent<StorageBoardController>().isOccupied = true;
         if (storageBoard.transform.tag == "Add")
         {
-            storageBoard.GetComponent<StorageBoardController>().roll = selectedObject;
-            storageBoard.GetComponent<StorageBoardController>().isAdd = true;
+            GameUtils.isAdd = true;
+            GameUtils.isFrozen = false;
+            GameUtils.isFire = false;
         }
         else if (storageBoard.transform.tag == "Frozen")
         {
-            storageBoard.GetComponent<StorageBoardController>().roll = selectedObject;
-            storageBoard.GetComponent<StorageBoardController>().isFrozen = true;
+            GameUtils.isAdd = false;
+            GameUtils.isFrozen = true;
+            GameUtils.isFire = false;
         }
-        else
+        else if (storageBoard.transform.tag == "Fire")
         {
-            storageBoard.GetComponent<StorageBoardController>().roll = selectedObject;
-            storageBoard.GetComponent<StorageBoardController>().isFire = true;
+            GameUtils.isAdd = false;
+            GameUtils.isFrozen = false;
+            GameUtils.isFire = true;
         }
+        storageBoard.GetComponent<StorageBoardController>().roll = selectedObject;
     }
 
     //使用已经存储起来的骰子

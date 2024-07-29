@@ -41,6 +41,12 @@ public class GameUtils
 
     public static bool isAttack = false;
 
+    public static bool isAdd = false;
+
+    public static bool isFrozen = false;
+
+    public static bool isFire = false;
+
     // 随机创建1~6出三个随机数的数组
     public static int[] CreateRandomNum()
     {
