@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -192,4 +193,23 @@ public class GameUtils
                                     .ToArray();
         return result;
     }
+
+    public static List<string> ConvertToMatrix(string input)
+    {
+        // 使用增强的正则表达式来匹配数组部分（包括多维数组）
+        var regex = new Regex(@"\[([^\[\]]|\[(?>[^\[\]]+|\[(?<Depth>)|\](?<-Depth>))*(?(Depth)(?!))\])*?(\]\[([^\[\]]|\[(?>[^\[\]]+|\[(?<Depth>)|\](?<-Depth>))*(?(Depth)(?!))\])*?)*\]");
+        var matches = regex.Matches(input);
+
+        // 创建一个列表来保存所有匹配的字符串
+        var resultList = new List<string>();
+
+        foreach (Match match in matches)
+        {
+            resultList.Add(match.Value);
+        }
+
+
+        return resultList;
+    }
+
 }
