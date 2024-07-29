@@ -71,8 +71,8 @@ public class GameMainView : MonoBehaviour
     // 确保该实例在场景加载时的唯一性
     void Awake()
     {
-        levelArr = new int[] { 1, 8, 14, 19, 26, 33, 40, 47, 58 };
-        stringArr = new string[] { "移动骰子攻击,抵御外星威胁", "信心大增", "铁血壁垒", "全力以赴", "闪电突袭", "血雨腥风", "暗流涌动", "万军之隙", "久经沙场" };
+        levelArr = new int[] { 1, 8, 14, 19, 26, 33, 40, 47, 58, 86 };
+        stringArr = new string[] { "移动骰子攻击,抵御外星威胁", "信心大增", "铁血壁垒", "全力以赴", "闪电突袭", "血雨腥风", "暗流涌动", "万军之隙", "久经沙场", "最后一搏" };
         mainCamera = Camera.main;
 
         chessBoardTransform = chessBoard.transform;  // 缓存棋盘的Transform引用
@@ -799,5 +799,10 @@ public class GameMainView : MonoBehaviour
     private void ChangeScene()
     {
         SceneManager.LoadScene("DeathView");
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene("MenuView");
     }
 }
