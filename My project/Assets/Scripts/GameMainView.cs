@@ -55,9 +55,14 @@ public class GameMainView : MonoBehaviour
 
     public AudioSource[] soundEffect;
 
+    public string[] stringArr;
+
+    public GameObject tips;
+
     void Awake()
     {
-        levelArr = new int[] { 1, 8, 14, 19, 27, 34, 45 };
+        levelArr = new int[] { 1, 8, 14, 19, 26, 33, 40, 47, 58 };
+        stringArr = new string[] { "移动骰子攻击,抵御外星威胁", "信心大增", "铁血壁垒", "全力以赴", "闪电突袭", "血雨腥风", "暗流涌动", "万军之隙", "久经沙场" };
         mainCamera = Camera.main;
         chessBoardTransform = chessBoard.transform;  // 缓存棋盘的Transform引用
     }
@@ -126,6 +131,7 @@ public class GameMainView : MonoBehaviour
             for (int index = 0; index < 2; index++)
             {
                 level++;
+                roundEffect();
                 isSpawn = result.Tables[0].Rows[level][4].ToString();
                 string flag = result.Tables[0].Rows[level][5].ToString();
                 if (flag != "" && index != 1)
@@ -511,6 +517,9 @@ public class GameMainView : MonoBehaviour
             if (level == levelArr[i])
             {
                 soundEffect[0].Play();
+                tips.SetActive(true);
+                tips.GetComponent<TextMeshProUGUI>().text = stringArr[i];
+                break;
             }
         }
     }
@@ -518,7 +527,6 @@ public class GameMainView : MonoBehaviour
     // 开始第一个回合
     private IEnumerator PlayFirstRound()
     {
-        roundEffect();
         CreateEnemy();
         yield return new WaitForSeconds(1f);
         CreateRoll();  //for test 
@@ -546,7 +554,6 @@ public class GameMainView : MonoBehaviour
     // 进行下一个回合
     private IEnumerator NextRound()
     {
-        roundEffect();
         isAddStorage();
         isFrozenStorage();
         isFireStorage();
