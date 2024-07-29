@@ -65,18 +65,20 @@ public class GameMainView : MonoBehaviour
 
     public static int onlineScore;
 
+    public static int highScore;
+
 
 
     // 确保该实例在场景加载时的唯一性
     void Awake()
     {
-        
+
         levelArr = new int[] { 1, 8, 14, 19, 26, 33, 40, 47, 58 };
         stringArr = new string[] { "移动骰子攻击,抵御外星威胁", "信心大增", "铁血壁垒", "全力以赴", "闪电突袭", "血雨腥风", "暗流涌动", "万军之隙", "久经沙场" };
         mainCamera = Camera.main;
 
         chessBoardTransform = chessBoard.transform;  // 缓存棋盘的Transform引用
-        hisScoreObj.GetComponent<TextMeshPro>().text = onlineScore.ToString();
+        hisScoreObj.GetComponent<TextMeshPro>().text = Math.Max(highScore, onlineScore).ToString();
 
     }
 
@@ -668,17 +670,17 @@ public class GameMainView : MonoBehaviour
     {
         int curScore = int.Parse(curScoreObj.GetComponent<TextMeshPro>().text);
         int hisScore = int.Parse(hisScoreObj.GetComponent<TextMeshPro>().text);
-        if (curScore > hisScore)
-        {
-            hisScoreObj.GetComponent<TextMeshPro>().text = curScore.ToString();
-        }
+        highScore = Math.Max(curScore, Math.Max(hisScore, onlineScore));
+
+        hisScoreObj.GetComponent<TextMeshPro>().text = highScore.ToString();
+
     }
 
     #endregion
 
     public void SubmitScore(bool shouldJump)
     {
-        if(shouldJump)
+        if (shouldJump)
         {
             if (slider != null && slider.value <= 0)
             {
@@ -693,7 +695,7 @@ public class GameMainView : MonoBehaviour
         }
         // 提交得分的逻辑
         // 确保在任何时候调用这个方法都不会导致异常
-        
+
     }
 
     void OnApplicationPause(bool pauseStatus)
