@@ -990,9 +990,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOccupied: 0
   isOpen: 0
-  isAdd: 0
-  isFrozen: 0
-  isFire: 0
   roll: {fileID: 0}
   levelNum: 0
 --- !u!1 &64720952
@@ -13854,9 +13851,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOccupied: 0
   isOpen: 0
-  isAdd: 0
-  isFrozen: 0
-  isFire: 0
   roll: {fileID: 0}
   levelNum: 0
 --- !u!1 &961574137
@@ -19619,9 +19613,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOccupied: 0
   isOpen: 0
-  isAdd: 0
-  isFrozen: 0
-  isFire: 0
   roll: {fileID: 0}
   levelNum: 0
 --- !u!1 &1403156348
@@ -24124,7 +24115,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6240\u6709"
+  m_text: "\u95EA\u7535\u7A81\u51FB"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5355a6d8f6f6a8e4c8b6a687b2074581, type: 2}
   m_sharedMaterial: {fileID: -5665461556018757553, guid: 5355a6d8f6f6a8e4c8b6a687b2074581, type: 2}
