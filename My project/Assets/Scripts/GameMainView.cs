@@ -578,6 +578,7 @@ public class GameMainView : MonoBehaviour
     // 轮到AI的回合
     private IEnumerator PlayAIRound()
     {
+        SubmitScore();
         SetBlockNum();
         SetBlockColorFalse();
         SetBlockColor();
