@@ -60,7 +60,7 @@ public class GameMainView : MonoBehaviour
 
     public GameObject tips;
 
-    private DataSet result;
+    private DataSet data;
 
     void Awake()
     {
@@ -117,7 +117,7 @@ public class GameMainView : MonoBehaviour
 
     private IEnumerator ReadCSVFile(string filePath)
     {
-        string result;
+        string result = "";
         if (filePath.Contains("://") || filePath.Contains(":///"))
         {
             UnityWebRequest www = UnityWebRequest.Get(filePath);
@@ -135,10 +135,10 @@ public class GameMainView : MonoBehaviour
         }
 
         // 将读取的 CSV 内容转换为 DataSet
-        DataSet dataSet = ParseCSV(result);
+        data = ParseCSV(result);
 
         // 调用创建敌人方法
-        CreateEnemy(dataSet);
+        CreateEnemy(data);
     }
 
     private DataSet ParseCSV(string csvText)
@@ -556,7 +556,7 @@ public class GameMainView : MonoBehaviour
     // 开始第一个回合
     private IEnumerator PlayFirstRound()
     {
-        CreateEnemy(result);
+        CreateEnemy(data);
         yield return new WaitForSeconds(1f);
         CreateRoll();  //for test 
         SetBlockNum();
@@ -600,7 +600,7 @@ public class GameMainView : MonoBehaviour
             }
             GameUtils.enemysArr[i].GetComponent<Enemy>().Move(false);
         }
-        CreateEnemy(result);  //先创建敌人数组，防止随后创建的骰子位置和敌人重复
+        CreateEnemy(data);  //先创建敌人数组，防止随后创建的骰子位置和敌人重复
         yield return new WaitForSeconds(1f);
         CreateRoll();
         SetBlockNum();
