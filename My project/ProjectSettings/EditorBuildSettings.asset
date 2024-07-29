@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuView.unity
     guid: cf911d33d8e3416498b484d688168cd1
   - enabled: 1
-    path: Assets/Scenes/RegisterView.unity
-    guid: f356165b0122419489d5ac0d7b5b88a4
-  - enabled: 1
     path: Assets/Scenes/GameView.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

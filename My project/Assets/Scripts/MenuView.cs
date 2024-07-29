@@ -31,6 +31,9 @@ public class MenuView : MonoBehaviour
 
     public AudioSource audio;
 
+    private bool hasPlayed = false; // 声明一个布尔变量
+
+
     // 公有属性用于获取实例
     public static MenuView Instance
     {
@@ -88,6 +91,12 @@ public class MenuView : MonoBehaviour
 
     public void PlayGame()
     {
+        if (hasPlayed)
+        {
+            return; // 如果已经执行过，直接返回
+        }
+
+        hasPlayed = true; // 设置布尔变量为true，表示已经执行过
         StartCoroutine(PlayAudioAndLoadScene());
     }
 

@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Android;
 using UnityEngine.EventSystems;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
@@ -59,6 +60,8 @@ public class GameMainView : MonoBehaviour
 
     public GameObject tips;
 
+    private DataSet result;
+
     void Awake()
     {
         levelArr = new int[] { 1, 8, 14, 19, 26, 33, 40, 47, 58 };
@@ -69,6 +72,8 @@ public class GameMainView : MonoBehaviour
 
     void Start()
     {
+        string filePath = Application.streamingAssetsPath + "/Config/EnemySpawn.csv";
+        StartCoroutine(ReadCSVFile(filePath));
         StartCoroutine(PlayFirstRound());
     }
 
@@ -109,10 +114,36 @@ public class GameMainView : MonoBehaviour
         }
     }
 
-    // 异步读取CSV文件，返回数据集
-    private DataSet ReadCSVFile(string filePath)
+
+    private IEnumerator ReadCSVFile(string filePath)
     {
-        using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+        string result;
+        if (filePath.Contains("://") || filePath.Contains(":///"))
+        {
+            UnityWebRequest www = UnityWebRequest.Get(filePath);
+            yield return www.SendWebRequest();
+            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Failed to load file from: " + filePath);
+                yield break;
+            }
+            result = www.downloadHandler.text;
+        }
+        else
+        {
+            result = File.ReadAllText(filePath);
+        }
+
+        // 将读取的 CSV 内容转换为 DataSet
+        DataSet dataSet = ParseCSV(result);
+
+        // 调用创建敌人方法
+        CreateEnemy(dataSet);
+    }
+
+    private DataSet ParseCSV(string csvText)
+    {
+        using (var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(csvText)))
         {
             using (var reader = ExcelReaderFactory.CreateCsvReader(stream))
             {
@@ -122,10 +153,8 @@ public class GameMainView : MonoBehaviour
     }
 
     // 回合开始时创建敌人
-    public void CreateEnemy()
+    public void CreateEnemy(DataSet result)
     {
-        string filePath = Application.dataPath + "/Config/EnemySpawn.csv";
-        var result = ReadCSVFile(filePath);
         if (GameUtils.enemysArr.Count == 0)
         {
             for (int index = 0; index < 2; index++)
@@ -527,7 +556,7 @@ public class GameMainView : MonoBehaviour
     // 开始第一个回合
     private IEnumerator PlayFirstRound()
     {
-        CreateEnemy();
+        CreateEnemy(result);
         yield return new WaitForSeconds(1f);
         CreateRoll();  //for test 
         SetBlockNum();
@@ -571,7 +600,7 @@ public class GameMainView : MonoBehaviour
             }
             GameUtils.enemysArr[i].GetComponent<Enemy>().Move(false);
         }
-        CreateEnemy();  //先创建敌人数组，防止随后创建的骰子位置和敌人重复
+        CreateEnemy(result);  //先创建敌人数组，防止随后创建的骰子位置和敌人重复
         yield return new WaitForSeconds(1f);
         CreateRoll();
         SetBlockNum();
