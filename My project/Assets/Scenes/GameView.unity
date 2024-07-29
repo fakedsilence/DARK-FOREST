@@ -1662,8 +1662,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1956855160}
   - {fileID: 1469126475}
+  - {fileID: 1956855160}
   - {fileID: 1015251944}
   - {fileID: 681486634}
   m_Father: {fileID: 2008587369}
@@ -2048,6 +2048,134 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &177600456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 177600457}
+  - component: {fileID: 177600458}
+  m_Layer: 0
+  m_Name: Music1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &177600457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177600456}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1554841448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &177600458
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177600456}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2ea4d5bd8faa1d848927b01129c5297d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &181148259
 GameObject:
   m_ObjectHideFlags: 0
@@ -3084,8 +3212,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 214536611}
   - {fileID: 1690607493}
+  - {fileID: 214536611}
   - {fileID: 361894520}
   - {fileID: 301672807}
   m_Father: {fileID: 2008587369}
@@ -3331,8 +3459,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1455895458}
   - {fileID: 2030985630}
+  - {fileID: 1455895458}
   - {fileID: 767299798}
   - {fileID: 1257579957}
   m_Father: {fileID: 2008587369}
@@ -3621,8 +3749,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1434591806}
   - {fileID: 326486575}
+  - {fileID: 1434591806}
   - {fileID: 1111554582}
   - {fileID: 2009828188}
   m_Father: {fileID: 2008587369}
@@ -6656,8 +6784,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1462928476}
   - {fileID: 1688348482}
+  - {fileID: 1462928476}
   - {fileID: 1768799168}
   - {fileID: 181857188}
   m_Father: {fileID: 2008587369}
@@ -6691,8 +6819,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1905567426}
   - {fileID: 824869998}
+  - {fileID: 1905567426}
   - {fileID: 1216141944}
   - {fileID: 1948082534}
   m_Father: {fileID: 2008587369}
@@ -8305,8 +8433,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 266643686}
   - {fileID: 187244744}
+  - {fileID: 266643686}
   - {fileID: 1457959870}
   - {fileID: 331669330}
   m_Father: {fileID: 2008587369}
@@ -8819,8 +8947,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 444459029}
   - {fileID: 1301561626}
+  - {fileID: 444459029}
   - {fileID: 50691352}
   - {fileID: 1193960555}
   m_Father: {fileID: 2008587369}
@@ -8850,12 +8978,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721994138}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.177713, y: 43.098667, z: 0.18165253}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 268.57675, y: 40.81315, z: 4.459926}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1554841448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &721994140
 AudioSource:
@@ -9172,8 +9300,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1956517384}
   - {fileID: 1878368575}
+  - {fileID: 1956517384}
   - {fileID: 1933214075}
   - {fileID: 1309468494}
   m_Father: {fileID: 2008587369}
@@ -10081,8 +10209,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 935684104}
   - {fileID: 434046708}
+  - {fileID: 935684104}
   - {fileID: 42674627}
   - {fileID: 2005822584}
   m_Father: {fileID: 2008587369}
@@ -10284,8 +10412,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 359586567}
   - {fileID: 1998078786}
+  - {fileID: 359586567}
   - {fileID: 1665026893}
   - {fileID: 1451561193}
   m_Father: {fileID: 2008587369}
@@ -11178,8 +11306,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 11944092}
   - {fileID: 1441441987}
+  - {fileID: 11944092}
   - {fileID: 741456164}
   - {fileID: 649764778}
   m_Father: {fileID: 2008587369}
@@ -12814,8 +12942,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 563148492}
   - {fileID: 1324909147}
+  - {fileID: 563148492}
   - {fileID: 262209198}
   - {fileID: 605699410}
   m_Father: {fileID: 2008587369}
@@ -13310,7 +13438,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194235342}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13319,7 +13447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 30}
+  m_AnchoredPosition: {x: -0, y: 30}
   m_SizeDelta: {x: 28, y: 27.4796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1194235344
@@ -14197,12 +14325,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288706225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6.5896697}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 297.75446, y: -2.2855191, z: -2.3113961}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1554841448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1288706227
 AudioSource:
@@ -14964,8 +15092,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 410082422}
   - {fileID: 2102950626}
+  - {fileID: 410082422}
   - {fileID: 1989212898}
   - {fileID: 1463466603}
   m_Father: {fileID: 2008587369}
@@ -17385,8 +17513,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 784320571}
   - {fileID: 1937738830}
+  - {fileID: 784320571}
   - {fileID: 1128771941}
   - {fileID: 54429306}
   m_Father: {fileID: 2008587369}
@@ -17753,8 +17881,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2062807636}
   - {fileID: 1597866230}
+  - {fileID: 2062807636}
   - {fileID: 422923700}
   - {fileID: 152116463}
   m_Father: {fileID: 2008587369}
@@ -17872,8 +18000,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1842122955}
   - {fileID: 1655164117}
+  - {fileID: 1842122955}
   - {fileID: 1312314739}
   - {fileID: 818159118}
   m_Father: {fileID: 2008587369}
@@ -17907,8 +18035,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1300619956}
   - {fileID: 220450746}
+  - {fileID: 1300619956}
   - {fileID: 1454166896}
   - {fileID: 187105139}
   m_Father: {fileID: 2008587369}
@@ -18058,6 +18186,40 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1554841447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1554841448}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1554841448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554841447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -297.75446, y: 2.2855191, z: -4.2782736}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1288706226}
+  - {fileID: 721994139}
+  - {fileID: 177600457}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1556179818
 GameObject:
   m_ObjectHideFlags: 0
@@ -18747,8 +18909,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1059897693}
   - {fileID: 1852994695}
+  - {fileID: 1059897693}
   - {fileID: 508544496}
   - {fileID: 21403915}
   m_Father: {fileID: 2008587369}
@@ -19190,8 +19352,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 280852739}
   - {fileID: 486002366}
+  - {fileID: 280852739}
   - {fileID: 241439128}
   - {fileID: 104713643}
   m_Father: {fileID: 2008587369}
@@ -19393,8 +19555,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1926351098}
   - {fileID: 727785271}
+  - {fileID: 1926351098}
   - {fileID: 156102039}
   - {fileID: 2029738413}
   m_Father: {fileID: 2008587369}
@@ -19520,7 +19682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1791289618
 Transform:
   m_ObjectHideFlags: 0
@@ -19571,8 +19733,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 704700345}
   - {fileID: 510696979}
+  - {fileID: 704700345}
   - {fileID: 443960399}
   - {fileID: 1385096832}
   m_Father: {fileID: 2008587369}
@@ -20031,8 +20193,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 452690893}
   - {fileID: 1509968041}
+  - {fileID: 452690893}
   - {fileID: 1727214862}
   - {fileID: 348563886}
   m_Father: {fileID: 2008587369}
@@ -21248,8 +21410,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1194235343}
   - {fileID: 1646573709}
+  - {fileID: 1194235343}
   - {fileID: 674715598}
   - {fileID: 1598882301}
   m_Father: {fileID: 2008587369}
@@ -21283,8 +21445,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1406450996}
   - {fileID: 144805807}
+  - {fileID: 1406450996}
   - {fileID: 576696040}
   - {fileID: 363465138}
   m_Father: {fileID: 2008587369}
@@ -21318,8 +21480,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1274134358}
   - {fileID: 841445117}
+  - {fileID: 1274134358}
   - {fileID: 307888942}
   - {fileID: 810426100}
   m_Father: {fileID: 2008587369}
@@ -21668,7 +21830,7 @@ MonoBehaviour:
   slider: {fileID: 3316528}
   soundEffect:
   - {fileID: 721994140}
-  - {fileID: 0}
+  - {fileID: 177600458}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -22202,8 +22364,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 478427308}
   - {fileID: 2086688423}
+  - {fileID: 478427308}
   - {fileID: 2008695814}
   - {fileID: 607918848}
   m_Father: {fileID: 2008587369}
@@ -22651,8 +22813,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 794348983}
   - {fileID: 1731956320}
+  - {fileID: 794348983}
   - {fileID: 559468249}
   - {fileID: 548356176}
   m_Father: {fileID: 2008587369}
@@ -22686,8 +22848,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1885603144}
   - {fileID: 171163685}
+  - {fileID: 1885603144}
   - {fileID: 921525107}
   - {fileID: 536015982}
   m_Father: {fileID: 2008587369}
@@ -22721,8 +22883,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1354350135}
   - {fileID: 181148260}
+  - {fileID: 1354350135}
   - {fileID: 186209199}
   - {fileID: 780268832}
   m_Father: {fileID: 2008587369}
@@ -22747,6 +22909,5 @@ SceneRoots:
   - {fileID: 776904581}
   - {fileID: 1556179819}
   - {fileID: 1050934628}
-  - {fileID: 721994139}
-  - {fileID: 1288706226}
   - {fileID: 1206930091}
+  - {fileID: 1554841448}

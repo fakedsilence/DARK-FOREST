@@ -482,6 +482,21 @@ public class GameMainView : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < GameUtils.blockNumArr.GetLength(0); i++)
+        {
+            for (int j = 0; j < GameUtils.blockNumArr.GetLength(1); j++)
+            {
+                if (GameUtils.blockNumArr[i, j] != 0)
+                {
+                    Transform blockTransform = chessBoardTransform.Find("block_" + i.ToString() + j.ToString());
+                    blockTransform.GetChild(2).gameObject.SetActive(true);
+                    blockTransform.GetChild(2).GetComponent<Animator>().SetBool("isAttack", true);
+                    StartCoroutine(HideAnimAfterDelay(0.13f, blockTransform));
+                }
+            }
+        }
+
+
         DelPosRollArr();
         DestroyRoll();
         addBoard.GetComponent<StorageBoardController>().ClearAddBoard();
@@ -494,6 +509,13 @@ public class GameMainView : MonoBehaviour
         Debug.Log("PlayAttack called");
         GameUtils.delBlockNumArr();
         StartCoroutine(PlayAIRound());
+    }
+
+    IEnumerator HideAnimAfterDelay(float delay, Transform block)
+    {
+        yield return new WaitForSeconds(delay);
+        block.GetChild(2).gameObject.SetActive(false);
+        block.GetChild(2).GetComponent<Animator>().SetBool("isAttack", false);
     }
 
     // 取消所有方块颜色
@@ -717,7 +739,8 @@ public class GameMainView : MonoBehaviour
         {
             for (int j = 0; j < GameUtils.blockNumArr.GetLength(1); j++)
             {
-                GameUtils.blockNumArr[i, j] = 0;
+
+
             }
         }
         slider.value = 10;
