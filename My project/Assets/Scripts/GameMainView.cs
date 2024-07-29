@@ -66,6 +66,8 @@ public class GameMainView : MonoBehaviour
 
     public static int highScore;
 
+    private string[] lines;
+
     // 确保该实例在场景加载时的唯一性
     void Awake()
     {
@@ -80,8 +82,23 @@ public class GameMainView : MonoBehaviour
     void Start()
     {
         Retry();
-        string filePath = Application.streamingAssetsPath + "/Config/EnemySpawn.txt";
-        StartCoroutine(ReadCSVFile(filePath));
+        // string filePath = Application.streamingAssetsPath + "/Config/EnemySpawn.txt";
+        // StartCoroutine(ReadCSVFile(filePath));
+        TextAsset mystr = Resources.Load<TextAsset>("Config/EnemySpawn");
+        if (mystr != null)
+        {
+            // 读取文本内容
+            string text = mystr.text;
+
+            // 将文本内容根据换行符拆分成数组
+            string[] lines = text.Split(new string[] { "\r\n", "\n" }, System.StringSplitOptions.None);
+
+            // 遍历并打印每一行
+            foreach (string line in lines)
+            {
+                Debug.Log(line);
+            }
+        }
         StartCoroutine(PlayFirstRound());
     }
 
@@ -92,6 +109,7 @@ public class GameMainView : MonoBehaviour
 
     #region 回合内方法
     // 回合开始时创建三个骰子
+
     public void CreateRoll()
     {
         int[] randomNumArr = GameUtils.CreateRandomNum();
@@ -122,66 +140,77 @@ public class GameMainView : MonoBehaviour
         }
     }
 
+    // private IEnumerator ReadCSVFile(string filePath)
+    // {
+    //     string result;
+    //     if (filePath.Contains("://") || filePath.Contains(":///"))
+    //     {
+    //         UnityWebRequest www = UnityWebRequest.Get(filePath);
+    //         yield return www.SendWebRequest();
+    //         if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+    //         {
+    //             Debug.LogError("Failed to load file from: " + filePath);
+    //             yield break;
+    //         }
+    //         result = www.downloadHandler.text;
+    //     }
+    //     else
+    //     {
+    //         result = File.ReadAllText(filePath);
+    //     }
 
-    private IEnumerator ReadCSVFile(string filePath)
-    {
-        string result;
-        if (filePath.Contains("://") || filePath.Contains(":///"))
-        {
-            UnityWebRequest www = UnityWebRequest.Get(filePath);
-            yield return www.SendWebRequest();
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError("Failed to load file from: " + filePath);
-                yield break;
-            }
-            result = www.downloadHandler.text;
-        }
-        else
-        {
-            result = File.ReadAllText(filePath);
-        }
+    //     // 将读取的 CSV 内容转换为 DataSet
+    //     data = ParseCSV(result);
 
-        // 将读取的 CSV 内容转换为 DataSet
-        data = ParseCSV(result);
+    //     // 调用创建敌人方法
+    //     CreateEnemy(data);
+    // }
 
-        // 调用创建敌人方法
-        CreateEnemy(data);
-    }
-
-    private DataSet ParseCSV(string csvText)
-    {
-        using (var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(csvText)))
-        {
-            using (var reader = ExcelReaderFactory.CreateCsvReader(stream))
-            {
-                return reader.AsDataSet();
-            }
-        }
-    }
+    // private DataSet ParseCSV(string csvText)
+    // {
+    //     using (var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(csvText)))
+    //     {
+    //         using (var reader = ExcelReaderFactory.CreateCsvReader(stream))
+    //         {
+    //             return reader.AsDataSet();
+    //         }
+    //     }
+    // }
 
     // 回合开始时创建敌人
-    public void CreateEnemy(DataSet result)
+    public void CreateEnemy()
     {
+        TextAsset mystr = Resources.Load<TextAsset>("Config/EnemySpawn");
+        if (mystr != null)
+        {
+            // 读取文本内容
+            string text = mystr.text;
+
+            // 将文本内容根据换行符拆分成数组
+            lines = text.Split(new string[] { "\r\n", "\n" }, System.StringSplitOptions.None);
+        }
         if (GameUtils.enemysArr.Count == 0)
         {
             for (int index = 0; index < 2; index++)
             {
                 level++;
+                List<string> data = GameUtils.ConvertToMatrix(lines[level]);
                 roundEffect();
-                isSpawn = result.Tables[0].Rows[level][4].ToString();
-                string flag = result.Tables[0].Rows[level][5].ToString();
+
+                isSpawn = data.Count > 3 ? data[3] : null;
+                string flag = data.Count > 4 ? data[4] : null;
+
                 if (flag != "" && index != 1)
                 {
                     level = levelArr[++beginLevel];
                 }
-                int[] type = GameUtils.ParseIntArray1D(result.Tables[0].Rows[level][1].ToString());
+                int[] type = GameUtils.ParseIntArray1D(data[0]);
                 if (type.Length == 0)
                 {
                     break;
                 }
-                int[][] hp = GameUtils.ParseIntArray2D(result.Tables[0].Rows[level][2].ToString());
-                int[] pos = GameUtils.ParseIntArray1D(result.Tables[0].Rows[level][3].ToString());
+                int[][] hp = GameUtils.ParseIntArray2D(data[1]);
+                int[] pos = GameUtils.ParseIntArray1D(data[2]);
 
                 for (int i = 0; i < type.Length; i++)
                 {
@@ -191,20 +220,20 @@ public class GameMainView : MonoBehaviour
                     GameUtils.enemysArr.Add(newEnemy);
                     GameUtils.posArr.Add(new List<int> { newEnemy.GetComponent<Enemy>().row, newEnemy.GetComponent<Enemy>().col });
                 }
-
             }
         }
         else
         {
-            isSpawn = result.Tables[0].Rows[level][4].ToString();
+            List<string> data = GameUtils.ConvertToMatrix(lines[level]);
+            isSpawn = data.Count > 3 ? data[3] : null;
             if (isSpawn != "" || isCreate())
             {
                 return;
             }
             level++;
-            int[] type = GameUtils.ParseIntArray1D(result.Tables[0].Rows[level][1].ToString());
-            int[][] hp = GameUtils.ParseIntArray2D(result.Tables[0].Rows[level][2].ToString());
-            int[] pos = GameUtils.ParseIntArray1D(result.Tables[0].Rows[level][3].ToString());
+            int[] type = GameUtils.ParseIntArray1D(data[0]);
+            int[][] hp = GameUtils.ParseIntArray2D(data[1]);
+            int[] pos = GameUtils.ParseIntArray1D(data[2]);
 
             for (int i = 0; i < type.Length; i++)
             {
@@ -376,7 +405,7 @@ public class GameMainView : MonoBehaviour
             TextMeshPro textMeshPro = blockTransform.GetChild(1).GetComponent<TextMeshPro>();
             textMeshPro.text = currentNum.ToString();
             textMeshPro.gameObject.SetActive(currentNum != 0);
-            Color newColor = GetColorForNumber(type);
+            Color newColor = GetColorForNumber(currentNum, type);
             SpriteRenderer spriteRenderer = blockTransform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
             if (spriteRenderer != null)
             {
@@ -389,22 +418,23 @@ public class GameMainView : MonoBehaviour
         }
     }
 
-    private Color GetColorForNumber(GameUtils.RollType type)
+    private Color GetColorForNumber(int number, GameUtils.RollType type)
     {
+        if (number > 6) number = 6;  // 确保 number 不超过 6
         Color color;
         // 计算 alpha 值
-
+        int alpha = Mathf.Clamp((number - 1) * 45 + 35, 0, 255);
         if (type == GameUtils.RollType.frozenType)
         {
-            color = new Color32(205, 233, 236, 100);
+            color = new Color32(205, 233, 236, (byte)(alpha >= 255 ? 200 : alpha));
         }
         else if (type == GameUtils.RollType.fireType)
         {
-            color = new Color32(183, 57, 57, 100);
+            color = new Color32(183, 57, 57, (byte)(alpha >= 255 ? 200 : alpha));
         }
         else
         {
-            color = new Color32(255, 176, 5, 100);  // 白色但透明度根据 alpha 计算
+            color = new Color32(255, 176, 5, (byte)(alpha >= 255 ? 200 : alpha));  // 白色但透明度根据 alpha 计算
         }
 
         return color;
@@ -601,7 +631,7 @@ public class GameMainView : MonoBehaviour
     // 开始第一个回合
     private IEnumerator PlayFirstRound()
     {
-        CreateEnemy(data);
+        CreateEnemy();
         yield return new WaitForSeconds(1f);
         CreateRoll();  //for test 
         SetBlockNum();
@@ -652,7 +682,7 @@ public class GameMainView : MonoBehaviour
             }
             GameUtils.enemysArr[i].GetComponent<Enemy>().Move(false);
         }
-        CreateEnemy(data);  //先创建敌人数组，防止随后创建的骰子位置和敌人重复
+        CreateEnemy();  //先创建敌人数组，防止随后创建的骰子位置和敌人重复
         yield return new WaitForSeconds(1f);
         CreateRoll();
         SetBlockNum();
