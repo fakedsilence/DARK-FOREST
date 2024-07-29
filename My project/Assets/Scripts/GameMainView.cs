@@ -53,6 +53,8 @@ public class GameMainView : MonoBehaviour
 
     public static int score;
 
+    public AudioSource[] soundEffect;
+
     void Awake()
     {
         levelArr = new int[] { 1, 8, 14, 19, 27, 34, 45 };
@@ -504,6 +506,7 @@ public class GameMainView : MonoBehaviour
     // 开始第一个回合
     private IEnumerator PlayFirstRound()
     {
+        soundEffect[0].Play();
         CreateEnemy();
         yield return new WaitForSeconds(1f);
         CreateRoll();  //for test 
@@ -531,6 +534,7 @@ public class GameMainView : MonoBehaviour
     // 进行下一个回合
     private IEnumerator NextRound()
     {
+        soundEffect[0].Play();
         isAddStorage();
         isFrozenStorage();
         isFireStorage();

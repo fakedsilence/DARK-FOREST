@@ -29,6 +29,8 @@ public class MenuView : MonoBehaviour
     // 单例实例
     private static MenuView instance;
 
+    public AudioSource audio;
+
     // 公有属性用于获取实例
     public static MenuView Instance
     {
@@ -86,6 +88,13 @@ public class MenuView : MonoBehaviour
 
     public void PlayGame()
     {
+        StartCoroutine(PlayAudioAndLoadScene());
+    }
+
+    private IEnumerator PlayAudioAndLoadScene()
+    {
+        audio.Play();
+        yield return new WaitForSeconds(audio.clip.length);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -138,13 +147,13 @@ public class MenuView : MonoBehaviour
                 }
             }).ContinueWith(t =>
             {
-                if(success)
+                if (success)
                 {
                     LoginButton();
                     // loginPanel.SetActive(false);
                     // mainPanel.SetActive(true);
                 }
-                
+
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
         else if (usernameString.Length <= 1)
