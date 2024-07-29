@@ -91,13 +91,7 @@ public class GameMainView : MonoBehaviour
             string text = mystr.text;
 
             // 将文本内容根据换行符拆分成数组
-            string[] lines = text.Split(new string[] { "\r\n", "\n" }, System.StringSplitOptions.None);
-
-            // 遍历并打印每一行
-            foreach (string line in lines)
-            {
-                Debug.Log(line);
-            }
+            lines = text.Split(new string[] { "\r\n", "\n" }, System.StringSplitOptions.None);
         }
         StartCoroutine(PlayFirstRound());
     }
@@ -468,8 +462,7 @@ public class GameMainView : MonoBehaviour
         // 获取 RollController 和 Enemy 组件
         for (int i = 0; i < GameUtils.rollsArr.Count; i++)
         {
-            GameUtils.rollsArr[i].transform.GetChild(0).gameObject.SetActive(true);
-            GameUtils.rollsArr[i].transform.GetChild(0).GetComponent<Animator>().SetBool("isFrozen", true);
+
             RollController rollController = GameUtils.rollsArr[i].GetComponent<RollController>();
             if (rollController.isFrozen)
             {
@@ -524,9 +517,43 @@ public class GameMainView : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < GameUtils.rollsArr.Count; i++)
+        {
+            if (GameUtils.rollsArr[i].GetComponent<RollController>().type == GameUtils.RollType.fireType)
+            {
+                int[,] directions = new int[,] { { 0, 0 }, { 0, -1 }, { -1, 0 }, { -1, -1 }, { 1, 0 }, { 0, 1 }, { 1, 1 }, { 1, -1 }, { -1, 1 } };
+                int row = GameUtils.rollsArr[i].GetComponent<RollController>().row;
+                int col = GameUtils.rollsArr[i].GetComponent<RollController>().col;
+                for (int j = 0; j < directions.GetLength(0); j++)
+                {
+                    int newRow = row + directions[j, 0];
+                    int newCol = col + directions[j, 1];
+                    if (newRow >= 0 && newRow <= 5 && newCol >= 0 && newCol <= 4)
+                    {
+                        Transform blockTransform = chessBoardTransform.Find("block_" + newRow.ToString() + newCol.ToString());
+                        blockTransform.GetChild(3).gameObject.SetActive(true);
+                        blockTransform.GetChild(3).GetComponent<Animator>().SetBool("isFire", true);
+                        StartCoroutine(FireDelay(0.3f, blockTransform));
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < GameUtils.rollsArr.Count; i++)
+        {
+            if (GameUtils.rollsArr[i].GetComponent<RollController>().type == GameUtils.RollType.frozenType)
+            {
+                int row = GameUtils.rollsArr[i].GetComponent<RollController>().row;
+                int col = GameUtils.rollsArr[i].GetComponent<RollController>().col;
+                Transform blockTransform = chessBoardTransform.Find("block_" + row.ToString() + col.ToString());
+                blockTransform.GetChild(4).gameObject.SetActive(true);
+                blockTransform.GetChild(4).GetComponent<Animator>().SetBool("isFrozen", true);
+                StartCoroutine(frozenDelay(0.3f, blockTransform));
+            }
+        }
 
         DelPosRollArr();
         DestroyRoll();
+
         addBoard.GetComponent<StorageBoardController>().ClearAddBoard();
 
         // 倒序遍历数组 防止因删除敌人出错
@@ -537,6 +564,20 @@ public class GameMainView : MonoBehaviour
         Debug.Log("PlayAttack called");
         GameUtils.delBlockNumArr();
         StartCoroutine(PlayAIRound());
+    }
+
+    IEnumerator frozenDelay(float delay, Transform block)
+    {
+        yield return new WaitForSeconds(delay);
+        block.GetChild(4).gameObject.SetActive(false);
+        block.GetChild(4).GetComponent<Animator>().SetBool("isFrozen", false);
+    }
+
+    IEnumerator FireDelay(float delay, Transform block)
+    {
+        yield return new WaitForSeconds(delay);
+        block.GetChild(3).gameObject.SetActive(false);
+        block.GetChild(3).GetComponent<Animator>().SetBool("isFire", false);
     }
 
     IEnumerator HideAnimAfterDelay(float delay, Transform block)

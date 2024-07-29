@@ -120,6 +120,9 @@ public class Enemy : MonoBehaviour
         {
             fireNum = 0;
             hp -= fireDamage;
+            Transform fire = transform.GetChild(1);
+            fire.gameObject.SetActive(true);
+            StartCoroutine(FireDelay(0.3f, fire));
         }
         if (isFire)
         {
@@ -144,6 +147,13 @@ public class Enemy : MonoBehaviour
             }
             UpdateHP();
         }
+    }
+
+    IEnumerator FireDelay(float delay, Transform block)
+    {
+        yield return new WaitForSeconds(delay);
+        block.gameObject.SetActive(false);
+        block.GetComponent<Animator>().SetBool("isFire", false);
     }
 
     private IEnumerator ResetHitFlag()
