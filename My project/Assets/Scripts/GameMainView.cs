@@ -22,7 +22,7 @@ public class GameMainView : MonoBehaviour
 
     public GameObject[] rolls;
 
-    public GameObject enemy;
+    public GameObject[] enemy;
 
     public GameObject curScoreObj;
 
@@ -185,7 +185,7 @@ public class GameMainView : MonoBehaviour
 
                 for (int i = 0; i < type.Length; i++)
                 {
-                    GameObject newEnemy = Instantiate(enemy);  //先用0，之后再用type中的类型
+                    GameObject newEnemy = Instantiate(enemy[type[i]]);  //先用0，之后再用type中的类型
                     UpdateEnemyProperties(newEnemy.GetComponent<Enemy>(), new int[] { hp[i][0], hp[i][1] }, pos[i], index == 0 ? 4 : 5, type[i]);
                     newEnemy.GetComponent<Enemy>().Initialize();
                     GameUtils.enemysArr.Add(newEnemy);
@@ -208,7 +208,7 @@ public class GameMainView : MonoBehaviour
 
             for (int i = 0; i < type.Length; i++)
             {
-                GameObject newEnemy = Instantiate(enemy);  //先用0，之后再用type中的类型
+                GameObject newEnemy = Instantiate(enemy[type[i]]);  //先用0，之后再用type中的类型
                 UpdateEnemyProperties(newEnemy.GetComponent<Enemy>(), new int[] { hp[i][0], hp[i][1] }, pos[i], 5, type[i]);
                 newEnemy.GetComponent<Enemy>().Initialize();
                 GameUtils.enemysArr.Add(newEnemy);

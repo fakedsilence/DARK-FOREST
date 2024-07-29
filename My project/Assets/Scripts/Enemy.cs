@@ -116,6 +116,7 @@ public class Enemy : MonoBehaviour
             if (damage != 0)
             {
                 hp -= damage;
+                GetComponent<SpriteRenderer>().sprite = sprites[type];
                 gameObject.GetComponent<Animator>().SetBool("isHit", true);
                 StartCoroutine(ResetHitFlag());
             }
