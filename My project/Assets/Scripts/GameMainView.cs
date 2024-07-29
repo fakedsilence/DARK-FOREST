@@ -438,6 +438,8 @@ public class GameMainView : MonoBehaviour
         // 获取 RollController 和 Enemy 组件
         for (int i = 0; i < GameUtils.rollsArr.Count; i++)
         {
+            GameUtils.rollsArr[i].transform.GetChild(0).gameObject.SetActive(true);
+            GameUtils.rollsArr[i].transform.GetChild(0).GetComponent<Animator>().SetBool("isFrozen", true);
             RollController rollController = GameUtils.rollsArr[i].GetComponent<RollController>();
             if (rollController.isFrozen)
             {
@@ -638,7 +640,14 @@ public class GameMainView : MonoBehaviour
             {
                 if (!GameUtils.enemysArr[i].GetComponent<Enemy>().isFrozen)
                 {
-                    GameUtils.posArr[i][0]--;
+                    if (GameUtils.enemysArr[i].GetComponent<Enemy>().type == 4)
+                    {
+                        GameUtils.posArr[i][0] -= 2;
+                    }
+                    else
+                    {
+                        GameUtils.posArr[i][0]--;
+                    }
                 }
             }
             GameUtils.enemysArr[i].GetComponent<Enemy>().Move(false);

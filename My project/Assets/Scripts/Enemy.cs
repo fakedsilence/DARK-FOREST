@@ -46,6 +46,8 @@ public class Enemy : MonoBehaviour
 
     public RuntimeAnimatorController[] anims;
 
+    public GameObject enemy;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -179,7 +181,7 @@ public class Enemy : MonoBehaviour
             if (!GameUtils.findPos(newRow, newCol))
             {
                 // 生成敌人
-                GameObject newEnemy = Instantiate(gameObject);
+                GameObject newEnemy = Instantiate(enemy);
                 chessBoard.GetComponent<GameMainView>().UpdateEnemyProperties(newEnemy.GetComponent<Enemy>(), new int[] { 1, 3 }, newCol, newRow, 0);
                 newEnemy.GetComponent<Enemy>().Initialize();
                 Transform blockTransform = chessBoard.transform.Find("block_" + row.ToString() + col.ToString());
