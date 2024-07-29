@@ -8,8 +8,9 @@ using UnityEngine;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.SocialPlatforms.Impl;
+using TMPro;
 
-public class AccountManager
+public class AccountManager : MonoBehaviour
 {
     private static readonly Lazy<AccountManager> instance = new Lazy<AccountManager>(() => new AccountManager());
     private static HttpClient client;
@@ -17,6 +18,7 @@ public class AccountManager
     private string _username;
     private string _password;
     private MenuView _menu;
+    public GameObject highScoreObject;
 
     public MenuView Menu
     { get { return _menu; } }
@@ -105,6 +107,10 @@ public class AccountManager
         {
             AccountManager.Instance.Username = userName;
             AccountManager.Instance.Password = password;
+            int highestScore = (await AccountManager.GetHighestScoreAsync(UserId)).Value;
+            Debug.Log($"High score: {highestScore}");
+            GameMainView.onlineScore = highestScore;
+            GameMainView.onlineScore = 114;
         }
         return success;
     }
@@ -254,6 +260,9 @@ public class AccountManager
                 AccountManager.Instance.UserId = int.Parse(uid);
                 Debug.Log($"可以登陆, uid: {uid}");
                 AccountManager.RequestLeaderboard(int.Parse(uid));
+                
+
+
                 return true;
                 // 处理成功逻辑
             }
@@ -297,6 +306,37 @@ public class AccountManager
     }
 
 
+    public async Task<int?> SendHighestScoreRequest(int uid)
+    {
+        return await GetHighestScoreAsync(uid);
+    }
+
+    private static async Task<int?> GetHighestScoreAsync(int uid)
+    {
+        try
+        {
+            var response = await client.GetAsync($"Scores/highestScore/{uid}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                MenuView.Instance.ShowPopup($"无法获取最高分\n状态码: {response.StatusCode}\n错误信息: {errorMessage}");
+                return null;
+            }
+
+            var responseString = await response.Content.ReadAsStringAsync();
+            var responseObject = JsonConvert.DeserializeObject<HighestScoreResponse>(responseString);
+            return responseObject.HighScore;
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"Request error: {ex.Message}");
+            MenuView.Instance.ShowPopup("请求最高分时出错");
+            return null;
+        }
+    }
+
+
     public class LeaderboardRequestModel
     {
         public int UID { get; set; }
@@ -327,5 +367,12 @@ public class AccountManager
     {
         public string State { get; set; }
         public string Uid { get; set; }
+    }
+
+    public class HighestScoreResponse
+    {
+        public string State { get; set; }
+        public int UID { get; set; }
+        public int HighScore { get; set; }
     }
 }
