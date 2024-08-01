@@ -203,7 +203,7 @@ public class Enemy : MonoBehaviour
             int newRow = row + directions[i, 0];
             int newCol = col + directions[i, 1];
             // 确保新生成的敌人位置没有敌人存在
-            if (!GameUtils.findPos(newRow, newCol))
+            if (!GameUtils.findPos(newRow, newCol) && newRow >= 0 && newRow <= 5 && newCol >= 0 && newCol <= 4)
             {
                 // 生成敌人
                 GameObject newEnemy = Instantiate(enemy);

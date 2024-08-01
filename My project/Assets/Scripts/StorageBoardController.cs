@@ -53,10 +53,8 @@ public class StorageBoardController : MonoBehaviour
                 GameUtils.RollType type = roll.GetComponent<RollController>().type;
                 if (type == GameUtils.RollType.rowType)
                 {
-
                     sprite = Resources.Load<Sprite>("Arts/Rolls/black/black" + num.ToString());
                     roll.GetComponent<SpriteRenderer>().sprite = sprite;
-
                 }
                 else if (type == GameUtils.RollType.colType)
                 {

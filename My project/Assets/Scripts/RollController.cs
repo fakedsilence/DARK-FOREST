@@ -97,7 +97,8 @@ public class RollController : MonoBehaviour
                         worldPos.z = selectedObject.transform.position.z;
                         for (int i = 0; i < storageBoard.Length; i++)
                         {
-                            if (Vector2.Distance(worldPos, storageBoard[i].transform.position) <= 45 && !storageBoard[i].GetComponent<StorageBoardController>().isOccupied)
+                            if (Vector2.Distance(worldPos, storageBoard[i].transform.position) <= 45 && !storageBoard[i].GetComponent<StorageBoardController>().isOccupied
+                            && selectedObject.transform.tag == "Roll")
                             {
                                 if (previousStorageBoard != null && previousStorageBoard != storageBoard[i])
                                 {
@@ -303,22 +304,17 @@ public class RollController : MonoBehaviour
         if (storageBoard.transform.tag == "Add")
         {
             GameUtils.isAdd = true;
-            GameUtils.isFrozen = false;
-            GameUtils.isFire = false;
         }
-        else if (storageBoard.transform.tag == "Frozen")
+        if (storageBoard.transform.tag == "Frozen")
         {
-            GameUtils.isAdd = false;
             GameUtils.isFrozen = true;
-            GameUtils.isFire = false;
         }
-        else if (storageBoard.transform.tag == "Fire")
+        if (storageBoard.transform.tag == "Fire")
         {
-            GameUtils.isAdd = false;
-            GameUtils.isFrozen = false;
             GameUtils.isFire = true;
         }
         storageBoard.GetComponent<StorageBoardController>().roll = selectedObject;
+        selectedObject.transform.tag = "Add";
     }
 
     //使用已经存储起来的骰子
@@ -351,6 +347,19 @@ public class RollController : MonoBehaviour
                         chessBoard.GetComponent<GameMainView>().UpdateBlockNum();
                         storageBoard.GetComponent<StorageBoardController>().isOccupied = false;
                         storageBoard.GetComponent<StorageBoardController>().roll = null;
+                        if (storageBoard.transform.tag == "Add")
+                        {
+                            GameUtils.isAdd = false;
+                        }
+                        if (storageBoard.transform.tag == "Frozen")
+                        {
+                            GameUtils.isFrozen = false;
+                        }
+                        if (storageBoard.transform.tag == "Fire")
+                        {
+                            GameUtils.isFire = false;
+                        }
+                        selectedObject.transform.tag = "Roll";
                         return;
                     }
                 }

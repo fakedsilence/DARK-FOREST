@@ -69,7 +69,7 @@ public class GameMainView : MonoBehaviour
     // 确保该实例在场景加载时的唯一性
     void Awake()
     {
-        levelArr = new int[] { 1, 8, 14, 19, 26, 33, 40, 47, 58, 86 };
+        levelArr = new int[] { 1, 7, 13, 18, 25, 32, 39, 46, 57, 86 };
         stringArr = new string[] { "移动骰子攻击,抵御外星威胁", "信心大增", "铁血壁垒", "全力以赴", "闪电突击", "血雨腥风", "暗流涌动", "万军之隙", "久经沙场", "最后一搏" };
         mainCamera = Camera.main;
 
@@ -794,8 +794,7 @@ public class GameMainView : MonoBehaviour
         {
             for (int j = 0; j < GameUtils.blockNumArr.GetLength(1); j++)
             {
-
-
+                GameUtils.blockNumArr[i, j] = 0;
             }
         }
         slider.value = 10;
@@ -823,6 +822,6 @@ public class GameMainView : MonoBehaviour
 
     public void Back()
     {
-        SceneManager.LoadScene("MenuView");
+        Application.Quit();
     }
 }

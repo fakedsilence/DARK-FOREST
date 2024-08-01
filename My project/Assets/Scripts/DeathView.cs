@@ -9,7 +9,7 @@ public class DeathView : MonoBehaviour
 
     private void Awake()
     {
-        // È·±£ TextMeshProUGUI ×é¼þÒÑ¾­±»ÕýÈ·¹ØÁª
+        // È·ï¿½ï¿½ TextMeshProUGUI ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½
         deathScoreText = deathScore.GetComponent<TextMeshProUGUI>();
         if (deathScoreText == null)
         {
@@ -30,15 +30,15 @@ public class DeathView : MonoBehaviour
         }
     }
 
-    // ÖØÆôÓÎÏ·
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·
     public void Restart()
     {
         SceneManager.LoadScene("GameView");
     }
 
-    // ·µ»ØÖ÷²Ëµ¥
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½
     public void Back()
     {
-        SceneManager.LoadScene("MenuView");
+        Application.Quit();
     }
 }

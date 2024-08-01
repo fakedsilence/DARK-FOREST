@@ -47,6 +47,8 @@ public class GameUtils
 
     public static bool isFire = false;
 
+    public static bool isRegister = true;
+
     // 随机创建1~6出三个随机数的数组
     public static int[] CreateRandomNum()
     {

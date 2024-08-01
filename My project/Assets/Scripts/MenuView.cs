@@ -11,8 +11,6 @@ public class MenuView : MonoBehaviour
 {
     public GameObject itemCell;
 
-    public Transform content;
-
     public TextMeshProUGUI userName;
 
     public TextMeshProUGUI password;
@@ -84,9 +82,14 @@ public class MenuView : MonoBehaviour
 
     private void Start()
     {
-        loginPanel.SetActive(true);
-        rankPanel.SetActive(false);
-        mainPanel.SetActive(false);
+        if (GameUtils.isRegister)
+        {
+
+            loginPanel.SetActive(true);
+            rankPanel.SetActive(false);
+            mainPanel.SetActive(false);
+            GameUtils.isRegister = false;
+        }
     }
 
     public void PlayGame()
