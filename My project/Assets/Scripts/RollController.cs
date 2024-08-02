@@ -270,6 +270,7 @@ public class RollController : MonoBehaviour
 
         isMoving = true;  // 开始移动时设置为true
         StartCoroutine(MoveAlongParabola(start, end, journeyLength));
+
     }
 
     private IEnumerator MoveAlongParabola(Vector2 start, Vector2 end, float journeyLength)

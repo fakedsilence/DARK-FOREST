@@ -714,11 +714,25 @@ public class GameMainView : MonoBehaviour
                 {
                     if (GameUtils.enemysArr[i].GetComponent<Enemy>().type == 4)
                     {
-                        GameUtils.posArr[i][0] -= 2;
+                        if (GameUtils.posArr[i][0] >= 2)
+                        {
+                            GameUtils.posArr[i][0] -= 2;
+                        }
+                        else
+                        {
+                            GameUtils.posArr[i][0] = 0;
+                        }
                     }
                     else
                     {
-                        GameUtils.posArr[i][0]--;
+                        if (GameUtils.posArr[i][0] >= 1)
+                        {
+                            GameUtils.posArr[i][0]--;
+                        }
+                        else
+                        {
+                            GameUtils.posArr[i][0] = 0;
+                        }
                     }
                 }
             }
