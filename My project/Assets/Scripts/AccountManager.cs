@@ -108,7 +108,6 @@ public class AccountManager : MonoBehaviour
             AccountManager.Instance.Username = userName;
             AccountManager.Instance.Password = password;
             int highestScore = (await AccountManager.GetHighestScoreAsync(UserId)).Value;
-            Debug.Log($"High score: {highestScore}");
             GameMainView.onlineScore = highestScore;
         }
         return success;
@@ -259,7 +258,7 @@ public class AccountManager : MonoBehaviour
                 AccountManager.Instance.UserId = int.Parse(uid);
                 Debug.Log($"可以登陆, uid: {uid}");
                 AccountManager.RequestLeaderboard(int.Parse(uid));
-                
+
 
 
                 return true;
@@ -271,7 +270,7 @@ public class AccountManager : MonoBehaviour
 
 
                 var errorMessage = await response.Content.ReadAsStringAsync();
-                if(errorMessage.Contains("USER_NOT_EXIST"))
+                if (errorMessage.Contains("USER_NOT_EXIST"))
                 {
                     MenuView.Instance.ShowPopup("登录失败\n用户不存在");
                 }

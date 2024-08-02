@@ -22,8 +22,6 @@ public class InputValidator : MonoBehaviour
 
     private char ValidateInput(string text, int charIndex, char addedChar)
     {
-        Debug.Log($"{text} {charIndex} {addedChar}");
-
         // 检查字符是否是 ASCII 范围内的字母或数字
         if (char.IsLetterOrDigit(addedChar) && addedChar < 128)
         {
