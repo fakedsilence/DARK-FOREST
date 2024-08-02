@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Threading.Tasks;
-using ExcelDataReader;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -450,7 +449,6 @@ public class GameMainView : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Ended)
             {
-                Debug.Log(1);
                 PlayAttack();
             }
         }
@@ -568,7 +566,6 @@ public class GameMainView : MonoBehaviour
         {
             GameUtils.enemysArr[i].GetComponent<Enemy>().TakeDamage();
         }
-        Debug.Log("PlayAttack called");
         GameUtils.delBlockNumArr();
         StartCoroutine(PlayAIRound());
     }
@@ -804,14 +801,12 @@ public class GameMainView : MonoBehaviour
     {
         if (pauseStatus)
         {
-            Debug.Log("paused, submit score");
             SubmitScore(false);
         }
     }
 
     void OnApplicationQuit()
     {
-        Debug.Log("game killed, submit score");
         SubmitScore(false);
     }
 

@@ -95,10 +95,13 @@ public class RollController : MonoBehaviour
                     {
                         Vector3 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
                         worldPos.z = selectedObject.transform.position.z;
+
+                        bool foundStorageSlot = false;
+
                         for (int i = 0; i < storageBoard.Length; i++)
                         {
                             if (Vector2.Distance(worldPos, storageBoard[i].transform.position) <= 45 && !storageBoard[i].GetComponent<StorageBoardController>().isOccupied
-                            && selectedObject.transform.tag == "Roll")
+                                && selectedObject.transform.tag == "Roll")
                             {
                                 if (previousStorageBoard != null && previousStorageBoard != storageBoard[i])
                                 {
@@ -107,15 +110,21 @@ public class RollController : MonoBehaviour
                                 storageRoll(storageBoard[i]);
                                 selectedObject.transform.position = storageBoard[i].transform.position;
                                 previousStorageBoard = storageBoard[i];  // 更新上一个存储槽
+                                foundStorageSlot = true;
+                                break;  // 既然已经找到存储槽，就跳出循环
                             }
                             else if (selectedObject.transform.position == storageBoard[i].transform.position && storageBoard[i].GetComponent<StorageBoardController>().isOccupied)
                             {
                                 UseStorageRoll(worldPos, storageBoard[i]);
+                                foundStorageSlot = true;
+                                break;  // 既然已经使用存储槽，就跳出循环
                             }
-                            else
-                            {
-                                selectedObject.transform.position = getBoardPos(selectedObject.transform.position, worldPos);
-                            }
+                        }
+
+                        if (!foundStorageSlot)
+                        {
+                            // 如果没有找到存储槽，则在棋盘上处理
+                            selectedObject.transform.position = getBoardPos(selectedObject.transform.position, worldPos);
                         }
                     }
                     break;
@@ -124,7 +133,7 @@ public class RollController : MonoBehaviour
                 case TouchPhase.Ended:
                     if (selectedObject != null)
                     {
-                        // 检查是否在存储槽中结束拖动
+                        //检查是否在存储槽中结束拖动
                         bool inStorageSlot = false;
                         foreach (var slot in storageBoard)
                         {

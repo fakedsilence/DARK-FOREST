@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using ExcelDataReader;
 using System.IO;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
@@ -164,8 +163,11 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator ResetDieFlag()
     {
+        yield return new WaitForSeconds(0.6f); // 等待动画结束
+        anim.SetBool("isHit", false);
+        anim.SetBool("isDeath", true);
         yield return new WaitForSeconds(0.3f);
-        anim.SetBool("isDie", false);
+        anim.SetBool("isDeath", false);
         SpawnSurroundingEnemies();
         Destroy(gameObject);
     }
@@ -182,7 +184,7 @@ public class Enemy : MonoBehaviour
         chessBoard.GetComponent<GameMainView>().AddScore(hpScore);
         GameUtils.RemovePosPair(row, col);
         GameUtils.enemysArr.Remove(gameObject);
-        anim.SetBool("isDie", true);
+        anim.SetBool("isHit", true);
         chessBoard.GetComponent<GameMainView>().UpdateHisScore();
         StartCoroutine(ResetDieFlag());
     }
